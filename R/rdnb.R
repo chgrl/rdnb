@@ -4,7 +4,7 @@
 #' @name rdnb
 #' @docType package
 #' @details The Deutsche Nationalbibliothek fulfills its legal mandate to index all publications issued in Germany. This database serves as the original bibliographic indexation. Anyone may research the database of the Deutsche Nationalbibliothek free of charge via public networks.
-#' An access token can be requested by sending an e-mail to the Interface Service (schnittstellen-service@dnb.de). The e-mail must include the required catalogue "Catalogue of German National Library (DNB) / Katalog der Deutschen Nationalbibliothek (DNB)" and the access option "via access token / über Zugangscode". You will receive a message as soon as access is activated, which might take some days. See \url{http://www.dnb.de/EN/Service/DigitaleDienste/SRU/sru_node.html} for details.
+#' An access token can be requested by sending an e-mail to the Interface Service (email{schnittstellen-service@@dnb.de}). The e-mail must include the required catalogue "Catalogue of German National Library (DNB) / Katalog der Deutschen Nationalbibliothek (DNB)" and the access option "via access token / über Zugangscode". You will receive a message as soon as access is activated, which might take some days. See \url{http://www.dnb.de/EN/Service/DigitaleDienste/SRU/sru_node.html} for details.
 #'If you do not want to enter your token for each R session, put the following in your .Renviron or .Rprofile file:
 #' \code{DNB_TOKEN=PUTYOURTOKENHERE}
 #' @importFrom httr GET
