@@ -76,7 +76,6 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 #' @title Search the DNB catalogue - advanced search
 #' @description \code{dnb_search} exposes a search in the DNB catalogue. 
 #' @param query the main search query; single string value or vector of strings.
-#' @param genre the bibliographic genre to ; single string value or vector of strings.
 #' @param print if \code{TRUE} the search results are printed (default is \code{FALSE}).
 #' @return A list of results with metadata.
 #' @details to do
