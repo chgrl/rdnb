@@ -46,5 +46,5 @@ dnb_token <- function(force=FALSE) {
 
 
 hasKey <- function() {
-	!identical(zeit_key(), "")
+	!identical(dnb_token(), "")
 }
