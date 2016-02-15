@@ -9,6 +9,7 @@
 #' \code{DNB_TOKEN=PUTYOURTOKENHERE}
 #' @importFrom httr GET
 #' @importFrom httr content
+#' @importFrom xml2 as_list
 #' @importFrom xml2 read_xml
 #' @import brew
 #' @import grDevices
