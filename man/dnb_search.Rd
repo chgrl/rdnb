@@ -11,17 +11,17 @@ dnb_search(title, author, year, publisher, keyword, type, language,
   limit = 10, print = FALSE)
 }
 \arguments{
-\item{title}{the title (including subtitle, short title, volume title, etc.); single string value or vector of strings.}
+\item{title}{the title (including subtitle, short title, volume title, etc.); optional single string value or vector of strings.}
 
-\item{author}{the author(s); single string value or vector of strings.}
+\item{author}{the author(s); optional single string value or vector of strings.}
 
-\item{year}{the year of publishing; single integer value or vector of integers.}
+\item{year}{the year of publishing; optional single integer value or vector of integers.}
 
-\item{publisher}{the publisher (publisher name and/or location); single string value or vector of strings.}
+\item{publisher}{the publisher (publisher name and/or location); optional single string value or vector of strings.}
 
-\item{keyword}{one or a set of keywords describing the work (subjects, persons, locations, organisations, etc.); single string value or vector of strings.}
+\item{keyword}{one or a set of keywords describing the work (subjects, persons, locations, organisations, etc.); optional single string value or vector of strings.}
 
-\item{type}{the type of publication, one or a vector of articles, manuscript, biographicaldoc, letters, bequest, collections, books, brailles, maps, discs, dissertations, online, films, microfiches, multimedia, music, scores, serials, persons, subjects, corperations, works, events, geographics.}
+\item{type}{the type of publication (optional), one or a vector of \code{articles}, \code{manuscript}, \code{biographicaldoc}, \code{letters}, \code{bequest}, \code{collections}, \code{books}, \code{brailles}, \code{maps}, \code{discs}, \code{dissertations}, \code{online}, \code{films}, \code{microfiches}, \code{multimedia}, \code{music}, \code{scores}, \code{serials}, \code{persons}, \code{subjects}, \code{corperations}, \code{works}, \code{events}, \code{geographics}.}
 
 \item{language}{the language of the work by ISO 639-2/B code (\url{http://www.dnb.de/SharedDocs/Downloads/DE/DNB/standardisierung/inhaltserschliessung/sprachenCodesEnglisch.pdf?__blob=publicationFile}); single string value or vector of strings.}
 

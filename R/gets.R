@@ -1,11 +1,11 @@
 #' @title Search the DNB catalogue - simple search
 #' @description \code{dnb_search} exposes a search in the DNB catalogue. 
-#' @param title the title (including subtitle, short title, volume title, etc.); single string value or vector of strings.
-#' @param author the author(s); single string value or vector of strings.
-#' @param year the year of publishing; single integer value or vector of integers.
-#' @param publisher the publisher (publisher name and/or location); single string value or vector of strings.
-#' @param keyword one or a set of keywords describing the work (subjects, persons, locations, organisations, etc.); single string value or vector of strings.
-#' @param type the type of publication, one or a vector of articles, manuscript, biographicaldoc, letters, bequest, collections, books, brailles, maps, discs, dissertations, online, films, microfiches, multimedia, music, scores, serials, persons, subjects, corperations, works, events, geographics.
+#' @param title the title (including subtitle, short title, volume title, etc.); optional single string value or vector of strings.
+#' @param author the author(s); optional single string value or vector of strings.
+#' @param year the year of publishing; optional single integer value or vector of integers.
+#' @param publisher the publisher (publisher name and/or location); optional single string value or vector of strings.
+#' @param keyword one or a set of keywords describing the work (subjects, persons, locations, organisations, etc.); optional single string value or vector of strings.
+#' @param type the type of publication (optional), one or a vector of \code{articles}, \code{manuscript}, \code{biographicaldoc}, \code{letters}, \code{bequest}, \code{collections}, \code{books}, \code{brailles}, \code{maps}, \code{discs}, \code{dissertations}, \code{online}, \code{films}, \code{microfiches}, \code{multimedia}, \code{music}, \code{scores}, \code{serials}, \code{persons}, \code{subjects}, \code{corperations}, \code{works}, \code{events}, \code{geographics}.
 #' @param language the language of the work by ISO 639-2/B code (\url{http://www.dnb.de/SharedDocs/Downloads/DE/DNB/standardisierung/inhaltserschliessung/sprachenCodesEnglisch.pdf?__blob=publicationFile}); single string value or vector of strings.
 #' @param limit number (and starting point) of results returned; single integer value (number of results, 1--100), vector of two integer values (number of and starting point for list of results, >=1) or \code{"all"} for a complete list of results.
 #' @param print if \code{TRUE} the search results are printed (default is \code{FALSE}).
