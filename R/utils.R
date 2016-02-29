@@ -42,4 +42,7 @@ dnb_token <- function(force=FALSE) {
 
 hasKey <- function() {
 	!identical(dnb_token(), "")
+dnb_to_df <- function(lst) {
+	df <- as.data.frame(lst$records)
+	return(df)
 }
