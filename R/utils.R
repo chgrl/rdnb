@@ -1,5 +1,5 @@
-dnb_get_url <- function(path, ..., token=dnb_token()) {
-	req <- GET("http://services.dnb.de/", path=path, query=list(version="1.1", operation="searchRetrieve", accessToken=token, query=..., recordSchema="MARC21-xml"))
+dnb_get_url <- function(path, query, limit, offset, token=dnb_token()) {
+	req <- GET("http://services.dnb.de/", path=path, query=list(version="1.1", operation="searchRetrieve", accessToken=token, query=query, maximumRecords=limit, startRecord=offset, recordSchema="MARC21-xml"))
 	dnb_check(req)
 	message("Request: ", req$url) # for debugging
 	return(req)
@@ -25,22 +25,17 @@ dnb_parse <- function(req) {
 dnb_token <- function(force=FALSE) {
 	env <- Sys.getenv('DNB_TOKEN')
 	if(!identical(env, "") && !force) return(env)
-
 	if(!interactive()) {
 		stop("Please set env var 'DNB_TOKEN' to your personal access token", call.=FALSE)
 	}
-
 	message("Couldn't find env var DNB_TOKEN.")
 	message("Please enter your token and press enter")
 	token <- readline(": ")
-
 	if(identical(token, "")) {
 		stop("Token entry failed", call.=FALSE)
 	}
-
 	message("Updating DNB_TOKEN env var to given token")
 	Sys.setenv(DNB_TOKEN=token)
-
 	return(token)
 }
 

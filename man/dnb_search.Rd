@@ -8,7 +8,7 @@
 }
 \usage{
 dnb_search(title, author, year, publisher, keyword, type, language,
-  print = FALSE)
+  limit = 10, print = FALSE)
 }
 \arguments{
 \item{title}{the title (including subtitle, short title, volume title, etc.); single string value or vector of strings.}
@@ -24,6 +24,8 @@ dnb_search(title, author, year, publisher, keyword, type, language,
 \item{type}{the type of publication, one or a vector of articles, manuscript, biographicaldoc, letters, bequest, collections, books, brailles, maps, discs, dissertations, online, films, microfiches, multimedia, music, scores, serials, persons, subjects, corperations, works, events, geographics.}
 
 \item{language}{the language of the work by ISO 639-2/B code (\url{http://www.dnb.de/SharedDocs/Downloads/DE/DNB/standardisierung/inhaltserschliessung/sprachenCodesEnglisch.pdf?__blob=publicationFile}); single string value or vector of strings.}
+
+\item{limit}{number (and starting point) of results returned; single integer value (number of results, 1--100), vector of two integer values (number of and starting point for list of results, >=1) or \code{"all"} for a complete list of results.}
 
 \item{print}{if \code{TRUE} the search results are printed (default is \code{FALSE}).}
 }

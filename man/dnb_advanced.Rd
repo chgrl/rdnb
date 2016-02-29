@@ -7,10 +7,12 @@
 \url{http://www.dnb.de/EN/Service/DigitaleDienste/SRU/sru_node.html}
 }
 \usage{
-dnb_advanced(query, print = FALSE)
+dnb_advanced(query, limit = 10, print = FALSE)
 }
 \arguments{
 \item{query}{the main search query; single string value or vector of strings.}
+
+\item{limit}{number (and starting point) of results returned; single integer value (number of results, 1--100), vector of two integer values (number of and starting point for list of results, >=1) or \code{"all"} for a complete list of results.}
 
 \item{print}{if \code{TRUE} the search results are printed (default is \code{FALSE}).}
 }
