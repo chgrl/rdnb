@@ -17,7 +17,7 @@ dnb_parse <- function(req) {
 	xml <- content(req, as="text")
 	if(identical(xml, "")) stop("Not output to parse", call.=FALSE)
 	if(length(grep("text/xml", req$headers$'content-type', fixed=TRUE))==0) stop("No XML to parse", call.=FALSE)
-	parsed <- as_list(read_xml(xml))
+	parsed <- as_list(read_xml(gsub("\n +", "", xml)))
 	return(parsed)
 }
 
