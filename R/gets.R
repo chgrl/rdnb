@@ -83,8 +83,7 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
   raw <- dnb_parse(req)
   
   # convert
-  #df <- dnb_to_df(raw)
-  df <- raw
+  df <- dnb_to_df(raw)
   
   # return
   if(print) print(df)
@@ -124,8 +123,7 @@ dnb_advanced <- function(query, limit=10, print=FALSE) {
   raw <- dnb_parse(req)
   
   # convert
-  #df <- dnb_to_df(raw)
-  df <- raw
+  df <- dnb_to_df(raw)
   
   # return
   if(print) print(df)
