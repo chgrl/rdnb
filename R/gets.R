@@ -83,9 +83,7 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 			strt <- limit[2]
 		} else stop("cannot read 'limit'")
 	} else stop("cannot read 'limit'")
-	
-	print(query)
-	
+		
 	# make request
 	req <- dnb_get_url(path="sru/dnb", query=query, limit=lim, start=strt)
 	raw <- dnb_parse(req)
