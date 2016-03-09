@@ -7,7 +7,7 @@
 #' @param keyword one or a set of keywords describing the work (subjects, persons, locations, organisations, etc.); optional single string value or vector of strings.
 #' @param type the type of publication (optional), one or a vector of \code{articles}, \code{manuscript}, \code{biographicaldoc}, \code{letters}, \code{bequest}, \code{collections}, \code{books}, \code{brailles}, \code{maps}, \code{discs}, \code{dissertations}, \code{online}, \code{films}, \code{microfiches}, \code{multimedia}, \code{music}, \code{scores}, \code{serials}, \code{persons}, \code{subjects}, \code{corperations}, \code{works}, \code{events}, \code{geographics}.
 #' @param language the language of the work by ISO 639-2/B code (\url{http://www.dnb.de/SharedDocs/Downloads/DE/DNB/standardisierung/inhaltserschliessung/sprachenCodesEnglisch.pdf?__blob=publicationFile}); single string value or vector of strings.
-#' @param limit number (and starting point) of results returned; single integer value (number of results, 1--100), vector of two integer values (number of and starting point for list of results, >=1) or \code{"all"} for a complete list of results.
+#' @param limit number and (optional) starting point of results returned; single integer value (number of results, 1--100), vector of two integer values (number of results and first result, >=1) or \code{"all"} for a complete list of results.
 #' @param print if \code{TRUE} the search results are printed (default is \code{FALSE}).
 #' @return A list of results with metadata.
 #' @details to do
@@ -62,16 +62,16 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 	} else language <- NULL
 	
 	# prepare limit
-	if(limit=="all") {
-		lim <- 10
-		off <- 0
+	if(any(limit=="all")) {
+		lim <- 100
+		strt <- 1
 	} else if(is.numeric(limit)) {
 		if(length(limit)==1) {
 			lim <- limit
-			off <- 0
+			strt <- 1
 		} else if(length(limit)==2) {
 			lim <- limit[1]
-			off <- limit[2]
+			strt <- limit[2]
 		} else stop("cannot read 'limit'")
 	} else stop("cannot read 'limit'")
 	
@@ -94,7 +94,7 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 #' @title Search the DNB catalogue - advanced search
 #' @description \code{dnb_search} exposes a search in the DNB catalogue. 
 #' @param query the main search query; single string value or vector of strings.
-#' @param limit number (and starting point) of results returned; single integer value (number of results, 1--100), vector of two integer values (number of and starting point for list of results, >=1) or \code{"all"} for a complete list of results.
+#' @param limit number and (optional) starting point of results returned; single integer value (number of results, 1--100), vector of two integer values (number of results and first result, >=1) or \code{"all"} for a complete list of results.
 #' @param print if \code{TRUE} the search results are printed (default is \code{FALSE}).
 #' @return A list of results with metadata.
 #' @details to do
@@ -105,21 +105,21 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 #' }
 dnb_advanced <- function(query, limit=10, print=FALSE) {		
 	# prepare limit
-	if(limit=="all") {
-		lim <- 10
-		off <- 0
+	if(any(limit=="all")) {
+		lim <- 100
+		strt <- 1
 	} else if(is.numeric(limit)) {
 		if(length(limit)==1) {
 			lim <- limit
-			off <- 0
+			strt <- 1
 		} else if(length(limit)==2) {
 			lim <- limit[1]
-			off <- limit[2]
+			strt <- limit[2]
 		} else stop("cannot read 'limit'")
 	} else stop("cannot read 'limit'")
 	
 	# make request
-  req <- dnb_get_url(path="sru/dnb", query=query, limit=limit, offset=offset)
+  req <- dnb_get_url(path="sru/dnb", query=query, limit=limit, start=strt)
   raw <- dnb_parse(req)
   
   # convert
