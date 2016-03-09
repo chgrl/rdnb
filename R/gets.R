@@ -87,11 +87,25 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 	print(query)
 	
 	# make request
-  req <- dnb_get_url(path="sru/dnb", query=query, limit=lim, offset=off)
-  raw <- dnb_parse(req)
-  
-  # convert
-  df <- dnb_to_df(raw)
+	req <- dnb_get_url(path="sru/dnb", query=query, limit=lim, start=strt)
+	raw <- dnb_parse(req)
+	
+	# convert
+	df <- dnb_to_df(raw)
+	
+	# loop request for all records
+	if(any(limit=="all")) {
+		nrec <- as.numeric(raw[["numberOfRecords"]])
+		strt <- as.numeric(raw[["nextRecordPosition"]])
+		repeat{
+			if(strt>nrec) break
+			req <- dnb_get_url(path="sru/dnb", query=query, limit=lim, start=strt)
+			raw <- dnb_parse(req)
+			df_add <- dnb_to_df(raw)
+			df <- rbind(df, df_add)
+			strt <- as.numeric(raw[["nextRecordPosition"]])
+		}
+	}
   
   # return
   if(print) print(df)
@@ -132,6 +146,20 @@ dnb_advanced <- function(query, limit=10, print=FALSE) {
   
   # convert
   df <- dnb_to_df(raw)
+  
+  # loop request for all records
+	if(any(limit=="all")) {
+		nrec <- as.numeric(raw[["numberOfRecords"]])
+		strt <- as.numeric(raw[["nextRecordPosition"]])
+		repeat{
+			if(strt>nrec) break
+			req <- dnb_get_url(path="sru/dnb", query=query, limit=lim, start=strt)
+			raw <- dnb_parse(req)
+			df_add <- dnb_to_df(raw)
+			df <- rbind(df, df_add)
+			strt <- as.numeric(raw[["nextRecordPosition"]])
+		}
+	}
   
   # return
   if(print) print(df)
