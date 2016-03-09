@@ -17,49 +17,58 @@
 #' \dontrun{
 #' }
 dnb_search <- function(title, author, year, publisher, keyword, type, language, limit=10, print=FALSE) {		
+	# init query
+	query <- ""
+	
 	# prepare title
 	if(!missing(title)) {
 		title <- paste0("tit=", title)
-		title <- paste0("(", title, ")")
-	} else title <- NULL
+		query <- paste0("(", title, ")")
+	}
 	
 	# prepare author
 	if(!missing(author)) {
 		author <- paste0("atr=", author)
-		author <- paste0("(", author, ")")
-	} else author <- NULL
+		if(query=="") query <- paste0("(", author, ")")
+		else query <- paste(query, paste0("(", author, ")"), sep=" AND ") 
+	}
 	
 	# prepare year
 	if(!missing(year)) {
 		year <- paste0("jhr=", year)
-		year <- paste0("(", year, ")")
-	} else year <- NULL
+		if(query=="") query <- paste0("(", year, ")")
+		else query <- paste(query, paste0("(", year, ")"), sep=" AND ")
+	}
 	
 	# prepare publisher
 	if(!missing(publisher)) {
 		publisher <- paste0("vlg=", publisher)
-		publisher <- paste0("(", publisher, ")")
-	} else publisher <- NULL
+		if(query=="") query <- paste0("(", publisher, ")")
+		else query <- paste(query, paste0("(", publisher, ")"), sep=" AND ")
+	}
 	
 	# prepare keyword
 	if(!missing(keyword)) {
 		keyword <- paste0("sw=", keyword)
-		keyword <- paste0("(", keyword, ")")
-	} else keyword <- NULL
+		if(query=="") query <- paste0("(", keyword, ")")
+		else query <- paste(query, paste0("(", keyword, ")"), sep=" AND ")
+	}
 	
 	# prepare type
 	if(!missing(type)) {
 		avail.types <- c("articles", "manuscript", "biographicaldoc", "letters", "bequest", "collections", "books", "brailles", "maps", "discs", "dissertations", "online", "films", "microfiches", "multimedia", "music", "scores", "serials", "persons", "subjects", "corperations", "works", "events", "geographics")
 		type <- avail.types[pmatch(type, avail.types)]		
 		type <- paste0("mat=", type)
-		type <- paste0("(", type, ")")
-	} else type <- NULL
+		if(query=="") query <- paste0("(", type, ")")
+		else query <- paste(query, paste0("(", type, ")"), sep=" AND ")
+	}
 	
 	# prepare language
 	if(!missing(language)) {
-		language <- paste0("spr=", language)
-		language <- paste0("(", language, ")")
-	} else language <- NULL
+		language <- paste("spr=", language, sep=" OR ")
+		if(query=="") query <- paste0("(", language, ")")
+		else query <- paste(query, paste0("(", language, ")"), sep=" AND ")
+	}
 	
 	# prepare limit
 	if(any(limit=="all")) {
@@ -75,8 +84,7 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 		} else stop("cannot read 'limit'")
 	} else stop("cannot read 'limit'")
 	
-	# build query
-	query <- paste(title, author, year, publisher, keyword, type, language)
+	print(query)
 	
 	# make request
   req <- dnb_get_url(path="sru/dnb", query=query, limit=lim, offset=off)
