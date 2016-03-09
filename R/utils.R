@@ -123,9 +123,6 @@ dnb_to_df <- function(lst) {
 		if(length(which(names(rec)=="856"))>0) {	# toc/description
 			for(kw in which(names(rec)=="856")) {
 				if(!is.null(rec[[kw]][["3"]]) && !is.null(rec[[kw]][["u"]])) {
-					cat("r: ", r ,"\n")
-					cat("kw: ", kw ,"\n")
-					str(rec[[kw]][["3"]])
 					if(rec[[kw]][["3"]]=="Inhaltsverzeichnis") {
 						df$toc[r] <- rec[[kw]][["u"]]
 					} else if(rec[[kw]][["3"]]=="Inhaltstext") {
