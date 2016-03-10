@@ -143,7 +143,7 @@ dnb_advanced <- function(query, limit=10, print=FALSE) {
 	} else stop("cannot read 'limit'")
 	
 	# make request
-  req <- dnb_get_url(path="sru/dnb", query=query, limit=limit, start=strt)
+  req <- dnb_get_url(path="sru/dnb", query=query, limit=lim, start=strt)
   raw <- dnb_parse(req)
   
   # convert
