@@ -35,14 +35,18 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 	
 	# prepare year
 	if(!missing(year)) {
-		year <- paste0("jhr=", year)
+		if(length(year)>1 && (tail(year, 1)-year[1]+1)==length(year)) {
+			year <- paste0("jhr>=", year[1], " AND jhr<=", tail(year, 1))
+		} else {
+			year <- paste0("jhr=", year, collapse=" OR ")
+		}
 		if(query=="") query <- paste0("(", year, ")")
 		else query <- paste(query, paste0("(", year, ")"), sep=" AND ")
 	}
 	
 	# prepare publisher
 	if(!missing(publisher)) {
-		publisher <- paste0("vlg=", publisher)
+		publisher <- paste0("vlg=", publisher, collapse=" OR ")
 		if(query=="") query <- paste0("(", publisher, ")")
 		else query <- paste(query, paste0("(", publisher, ")"), sep=" AND ")
 	}
@@ -58,14 +62,14 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 	if(!missing(type)) {
 		avail.types <- c("articles", "manuscript", "biographicaldoc", "letters", "bequest", "collections", "books", "brailles", "maps", "discs", "dissertations", "online", "films", "microfiches", "multimedia", "music", "scores", "serials", "persons", "subjects", "corperations", "works", "events", "geographics")
 		type <- avail.types[pmatch(type, avail.types)]		
-		type <- paste0("mat=", type)
+		type <- paste0("mat=", type, collapse=" OR ")
 		if(query=="") query <- paste0("(", type, ")")
 		else query <- paste(query, paste0("(", type, ")"), sep=" AND ")
 	}
 	
 	# prepare language
 	if(!missing(language)) {
-		language <- paste("spr=", language, sep=" OR ")
+		language <- paste0("spr=", language, collapse=" OR ")
 		if(query=="") query <- paste0("(", language, ")")
 		else query <- paste(query, paste0("(", language, ")"), sep=" AND ")
 	}
