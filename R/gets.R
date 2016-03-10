@@ -92,6 +92,12 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 	req <- dnb_get_url(path="sru/dnb", query=query, limit=lim, start=strt)
 	raw <- dnb_parse(req)
 	
+	# no hits
+	if(as.numeric(raw[["numberOfRecords"]]==0)) {
+		message("Nothing found")
+		return(NULL)
+	}
+	
 	# convert
 	df <- dnb_to_df(raw)
 	
@@ -145,6 +151,12 @@ dnb_advanced <- function(query, limit=10, print=FALSE) {
 	# make request
   req <- dnb_get_url(path="sru/dnb", query=query, limit=lim, start=strt)
   raw <- dnb_parse(req)
+  
+  # no hits
+	if(as.numeric(raw[["numberOfRecords"]]==0)) {
+		message("Nothing found")
+		return(NULL)
+	}
   
   # convert
   df <- dnb_to_df(raw)
