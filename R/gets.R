@@ -101,18 +101,17 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 	req <- dnb_get_url(path="sru/dnb", query=query, limit=lim, start=strt)
 	raw <- dnb_parse(req)
 	
-	# no hits
-	if(as.numeric(raw[["numberOfRecords"]]==0)) {
-		message("Nothing found")
-		return(NULL)
-	}
+	# print number of records
+	nrec <- as.numeric(raw[["numberOfRecords"]])
+	if(any(limit=="all") || nrec==0) message(nrec, " records found")
+	else message(nrec, " records found (request limited to", lim, " records)")
+	if(nrec==0) return(NULL)
 	
 	# convert
 	df <- dnb_to_df(raw)
 	
 	# loop request for all records
 	if(any(limit=="all")) {
-		nrec <- as.numeric(raw[["numberOfRecords"]])
 		strt <- as.numeric(raw[["nextRecordPosition"]])
 		repeat{
 			if(strt>nrec) break
@@ -161,11 +160,11 @@ dnb_advanced <- function(query, limit=10, print=FALSE) {
   req <- dnb_get_url(path="sru/dnb", query=query, limit=lim, start=strt)
   raw <- dnb_parse(req)
   
-  # no hits
-	if(as.numeric(raw[["numberOfRecords"]]==0)) {
-		message("Nothing found")
-		return(NULL)
-	}
+  # print number of records
+	nrec <- as.numeric(raw[["numberOfRecords"]])
+	if(any(limit=="all") || nrec==0) message(nrec, " records found")
+	else message(nrec, " records found (request limited to", lim, " records)")
+	if(nrec==0) return(NULL)
   
   # convert
   df <- dnb_to_df(raw)
