@@ -22,13 +22,19 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 	
 	# prepare title
 	if(!missing(title)) {
-		title <- paste0("tit=", title)
+		title <- paste0("tit=", title, collapse=" OR ")
+		title <- gsub("OR tit=+", "AND tit=", title, fixed=TRUE)
+		title <- gsub("OR tit=-", "NOT tit=", title, fixed=TRUE)
+		if(substr(title, 1, 5)=="tit=+" || substr(title, 1, 5)=="tit=-") stop("Do not use '+' or '-' in case of a single search string or with first string of a vector")
 		query <- paste0("(", title, ")")
 	}
 	
 	# prepare author
 	if(!missing(author)) {
-		author <- paste0("atr=", author)
+		author <- paste0("atr=", author, collapse=" OR ")
+		author <- gsub("OR atr=+", "AND atr=", author, fixed=TRUE)
+		author <- gsub("OR atr=-", "NOT atr=", author, fixed=TRUE)
+		if(substr(author, 1, 5)=="atr=+" || substr(author, 1, 5)=="atr=-") stop("Do not use '+' or '-' in case of a single search string or with first string of a vector")
 		if(query=="") query <- paste0("(", author, ")")
 		else query <- paste(query, paste0("(", author, ")"), sep=" AND ") 
 	}
@@ -53,7 +59,10 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 	
 	# prepare keyword
 	if(!missing(keyword)) {
-		keyword <- paste0("sw=", keyword)
+		keyword <- paste0("sw=", keyword, collapse=" OR ")
+		keyword <- gsub("OR sw=+", "AND sw=", keyword, fixed=TRUE)
+		keyword <- gsub("OR sw=-", "NOT sw=", keyword, fixed=TRUE)
+		if(substr(keyword, 1, 5)=="sw=+" || substr(keyword, 1, 5)=="sw=-") stop("Do not use '+' or '-' in case of a single search string or with first string of a vector")
 		if(query=="") query <- paste0("(", keyword, ")")
 		else query <- paste(query, paste0("(", keyword, ")"), sep=" AND ")
 	}
