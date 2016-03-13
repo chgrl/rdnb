@@ -104,7 +104,7 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 	# print number of records
 	nrec <- as.numeric(raw[["numberOfRecords"]])
 	if(any(limit=="all") || nrec==0) message(nrec, " records found")
-	else message(nrec, " records found (request limited to", lim, " records)")
+	else message(nrec, " records found (request limited to ", lim, " records)")
 	if(nrec==0) return(NULL)
 	
 	# convert
@@ -163,7 +163,7 @@ dnb_advanced <- function(query, limit=10, print=FALSE) {
   # print number of records
 	nrec <- as.numeric(raw[["numberOfRecords"]])
 	if(any(limit=="all") || nrec==0) message(nrec, " records found")
-	else message(nrec, " records found (request limited to", lim, " records)")
+	else message(nrec, " records found (request limited to ", lim, " records)")
 	if(nrec==0) return(NULL)
   
   # convert
