@@ -122,6 +122,10 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 			strt <- as.numeric(raw[["nextRecordPosition"]])
 		}
 	}
+	
+	# add metadata
+	attr(df, "number_of_records") <- nrec
+	attr(df, "query") <- unlist(raw[["echoedSearchRetrieveRequest"]][["query"]])
   
   # return
   if(print) print(df)
@@ -182,6 +186,10 @@ dnb_advanced <- function(query, limit=10, print=FALSE) {
 			strt <- as.numeric(raw[["nextRecordPosition"]])
 		}
 	}
+	
+	# add metadata
+	attr(df, "number_of_records") <- nrec
+	attr(df, "query") <- unlist(raw[["echoedSearchRetrieveRequest"]][["query"]])
   
   # return
   if(print) print(df)
