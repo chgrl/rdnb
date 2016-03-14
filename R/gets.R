@@ -83,49 +83,8 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 		else query <- paste(query, paste0("(", language, ")"), sep=" AND ")
 	}
 	
-	# prepare limit
-	if(any(limit=="all")) {
-		lim <- 100
-		strt <- 1
-	} else if(is.numeric(limit)) {
-		if(length(limit)==1) {
-			lim <- limit
-			strt <- 1
-		} else if(length(limit)==2) {
-			lim <- limit[1]
-			strt <- limit[2]
-		} else stop("Cannot read 'limit'")
-	} else stop("Cannot read 'limit'")
-		
-	# make request
-	req <- dnb_get_url(path="sru/dnb", query=query, limit=lim, start=strt)
-	raw <- dnb_parse(req)
-	
-	# print number of records
-	nrec <- as.numeric(raw[["numberOfRecords"]])
-	if(any(limit=="all") || nrec==0) message(nrec, " records found")
-	else message(nrec, " records found (request limited to ", lim, " records)")
-	if(nrec==0) return(NULL)
-	
-	# convert
-	df <- dnb_to_df(raw)
-	
-	# loop request for all records
-	if(any(limit=="all")) {
-		strt <- as.numeric(raw[["nextRecordPosition"]])
-		repeat{
-			if(strt>nrec) break
-			req <- dnb_get_url(path="sru/dnb", query=query, limit=lim, start=strt)
-			raw <- dnb_parse(req)
-			df_add <- dnb_to_df(raw)
-			df <- rbind(df, df_add)
-			strt <- as.numeric(raw[["nextRecordPosition"]])
-		}
-	}
-	
-	# add metadata
-	attr(df, "number_of_records") <- nrec
-	attr(df, "query") <- unlist(raw[["echoedSearchRetrieveRequest"]][["query"]])
+	# call dnb_advanced
+	df <- dnb_advanced(query=query, limit=limit, print=FALSE)
   
   # return
   if(print) print(df)
