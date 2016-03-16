@@ -10,23 +10,25 @@
 dnb_advanced(query, limit = 10, print = FALSE)
 }
 \arguments{
-\item{query}{the main search query; single string value or vector of strings.}
+\item{query}{the search query, expressed in the DNB query language; single string value.}
 
-\item{limit}{number (and starting point) of results returned; single integer value (number of results, 1--100), vector of two integer values (number of and starting point for list of results, >=1) or \code{"all"} for a complete list of results.}
+\item{limit}{number and (optional) starting point of results returned; single integer value (number of results, 1--100), vector of two integer values (number of results and first result, >=1) or \code{"all"} for a complete list of results.}
 
 \item{print}{if \code{TRUE} the search results are printed (default is \code{FALSE}).}
 }
 \value{
-A list of results with metadata.
+A \code{data.frame} of results with metadata.
 }
 \description{
-\code{dnb_search} exposes a search in the DNB catalogue.
+\code{dnb_search} exposes a search in the DNB catalogue, expressed in the DNB query language.
 }
 \details{
 to do
 }
 \examples{
 \dontrun{
+# german books titled with 'cat' (male or female), excluding titles containing dogs, since the year 2000
+cats <- dnb_advanced("(tit=katze OR tit=kater NOT tit=hund*) AND jhr>=2000 AND mat=books AND spr=ger")
 }
 }
 

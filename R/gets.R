@@ -15,6 +15,43 @@
 #' @export
 #' @examples
 #' \dontrun{
+#' # title search
+#' single.title <- dnb_search(title="katze")
+#' multi.title <- dnb_search(title=c("katze", "kater", "-hund", "+maus"))
+#'
+#' # author search
+#' single.author <- dnb_search(author="kern")
+#' author.or.author <- dnb_search(author=c("kern", "locke"))
+#' author.and.author <- dnb_search(author=c("kern", "+locke"))
+#' author.not.author <- dnb_search(author=c("kern", "-locke"))
+#'
+#' # publication year 
+#' one.year <- dnb_search(title="katze", year=2015)
+#' sequence.of.years <- dnb_search(title="katze", year=2010:2015)
+#' set.of.years <- dnb_search(title="katze", year=c(2010:2013, 2015))
+#'
+#' # publisher search
+#' single.publisher <- dnb_search(title="katze", publisher="kiepenheuer")
+#' set.of.publishers <- dnb_search(title="katze", publisher=c("kiepenheuer", "piper"))
+#'
+#' # keyword search
+#' single.keyword <- dnb_search(author="kern")
+#' keyword.or.keyword <- dnb_search(keyword=c("katze", "hund"))
+#' keyword.and.keyword <- dnb_search(keyword=c("katze", "+hund"))
+#' keyword.not.keyword <- dnb_search(keyword=c("katze", "-hund"))
+#'
+#' # type search
+#' single.type <- dnb_search(title="katze", type="books")
+#' set.of.types <- dnb_search(title="katze", type=c("books", "articles", "online"))
+#'
+#' # language search
+#' single.language <- dnb_search(title="cat", language="eng")
+#' set.of.languages <- dnb_search(title=c("cat", "katze"), language=c("eng", "ger"))
+#'
+#' # change limit of results
+#' first.result <- dnb_search(title="katze", limit=1)
+#' 5.results.starting.with.the.21st <- dnb_search(title="katze", limit=c(5, 21))
+#' all.results <- dnb_search(title="katze", limit="all")
 #' }
 dnb_search <- function(title, author, year, publisher, keyword, type, language, limit=10, print=FALSE) {		
 	# init query
@@ -93,16 +130,19 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 
 
 #' @title Search the DNB catalogue - advanced search
-#' @description \code{dnb_search} exposes a search in the DNB catalogue. 
-#' @param query the main search query; single string value or vector of strings.
+#' @description \code{dnb_search} exposes a search in the DNB catalogue, expressed in the DNB query language. 
+#' @param query the search query, expressed in the DNB query language; single string value. 
 #' @param limit number and (optional) starting point of results returned; single integer value (number of results, 1--100), vector of two integer values (number of results and first result, >=1) or \code{"all"} for a complete list of results.
 #' @param print if \code{TRUE} the search results are printed (default is \code{FALSE}).
-#' @return A list of results with metadata.
+#' @return A \code{data.frame} of results with metadata.
 #' @details to do
 #' @source \url{http://www.dnb.de/EN/Service/DigitaleDienste/SRU/sru_node.html}
 #' @export
 #' @examples
 #' \dontrun{
+#' # german books titled with 'cat' (male or female), 
+#' # excluding titles containing dogs, since the year 2000
+#' cats <- dnb_advanced("(tit=katze OR tit=kater NOT tit=hund*) AND jhr>=2000 AND mat=books AND spr=ger")
 #' }
 dnb_advanced <- function(query, limit=10, print=FALSE) {		
 	# prepare limit
