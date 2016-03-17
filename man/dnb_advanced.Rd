@@ -27,8 +27,9 @@ to do
 }
 \examples{
 \dontrun{
-# german books titled with 'cat' (male or female), excluding titles containing dogs, since the year 2000
-cats <- dnb_advanced("(tit=katze OR tit=kater NOT tit=hund*) AND jhr>=2000 AND mat=books AND spr=ger")
+# german books titled with 'cat' (male or female),
+# excluding titles containing dogs, since the year 2001
+cats <- dnb_advanced("(tit=katze OR tit=kater NOT tit=hund) AND jhr>2000 AND mat=books AND spr=ger")
 }
 }
 
