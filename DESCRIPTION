@@ -5,7 +5,7 @@ Version: 0.1-0
 Date: 2016-03-17
 Author: Christian Graul
 Maintainer: Christian Graul <christian.graul@gmail.com>
-Description: A wrapper for the Deutsche Nationalbibliohek (German National Library) API, available at <http://www.dnb.de>. The German National Library is entrusted with the task of collecting, permanently archiving, bibliographically classifying and making available to the general public all German and German-language publications from 1913, foreign publications about Germany, translations of German works, and the works of German-speaking emigrants published abroad between 1933 and 1945. A personal access token is required for usage.
+Description: A wrapper for the Deutsche Nationalbibliohek (German National Library) API, available at \url{http://www.dnb.de}. The German National Library is the German central archival library, collecting, archiving, bibliographically classifying all German and German-language publications from 1913, foreign publications about Germany, translations of German works, and the works of German-speaking emigrants published abroad between 1933 and 1945. A personal access token is required for usage.
 URL: https://github.com/chgrl/rdnb
 License: MIT + file LICENSE
 VignetteBuilder: knitr

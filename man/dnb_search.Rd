@@ -42,7 +42,7 @@ to do
 \dontrun{
 # title search
 single.title <- dnb_search(title="katze")
-multi.title <- dnb_search(title=c("katze", "kater", "-hund", "+maus"))
+multi.title <- dnb_search(title=c("katze", "kater", "+maus", "-hund"))
 
 # author search
 single.author <- dnb_search(author="kern")
@@ -51,7 +51,7 @@ author.and.author <- dnb_search(author=c("kern", "+locke"))
 author.not.author <- dnb_search(author=c("kern", "-locke"))
 
 # publication year
-one.year <- dnb_search(title="katze", year=2015)
+single.year <- dnb_search(title="katze", year=2015)
 sequence.of.years <- dnb_search(title="katze", year=2010:2015)
 set.of.years <- dnb_search(title="katze", year=c(2010:2013, 2015))
 
