@@ -41,7 +41,13 @@ If you do not want to enter your token for each R session, put the following in 
 
 ### Package install
 
-`rdnb` is available on GitHub. The `devtools`-package is required for installation.
+`diezeit` is available on CRAN and GitHub. Install from CRAN:
+
+```{r eval=FALSE}
+install.packages("rdnb")
+```
+
+To install the development version from GitHub the `devtools`-package is required.
 
 ```{r eval=FALSE}
 if(packageVersion("devtools") < 1.6) {
@@ -175,7 +181,7 @@ Use the `limit` parameter to set the number and optionally the starting point of
 ```{r}
 first.result <- dnb_search(title="katze", limit=1)
 five.results.starting.with.the.21st <- dnb_search(title="katze", limit=c(5, 21))
-all.results <- dnb_search(title="katze", limit="all")
+all.results <- dnb_search(title="katze", year=2016, limit="all")
 ```
 
 ##### Results
@@ -208,14 +214,15 @@ The following data is stored in the `data.frame` (if available):
 | description | link to description |
 | cover | link to cover image |
 
+
 The total number of records found by the request is stored in the attribute "number_of_records":
 
 ```{r}
 attr(cats, "number_of_records")
 ```
 
-and the query can be viewed by calling the "query"-attribute:
-  
+and the query itself can be viewed by calling the "query"-attribute:
+
 ```{r}
 attr(cats, "query")
 ```
@@ -225,8 +232,10 @@ You can use this query directly with the `dnb_advanced` function.
 
 #### Advanced search - `dnb_advanced`
 
-`dnb_advanced` allows for complex requests in 
+`dnb_advanced` allows for complex requests using the Contextual Query Language (CQL). See the [DNB advanced search help pages](http://www.dnb.de/EN/Header/Hilfe/kataloghilfeExpertensuche.html) for available indices and a list of examples.
+
+The following advanced search returns a list of german or english children's books titled with 'cat', excluding titles containing 'dog', since the year 2001:
 
 ```{r}
-cats <- dnb_advanced("(tit=katze OR tit=kater NOT tit=hund) AND jhr>2000 AND mat=books AND spr=ger")
+cats <- dnb_advanced("( (tit=katze OR tit=kater NOT tit=hund) OR (tit=cat NOT tit=dog) ) AND jhr>2000 AND mat=books AND (spr=ger OR spr=eng) AND sgt=K", limit="all")
 ```

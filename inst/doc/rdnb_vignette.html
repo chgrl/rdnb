@@ -9,7 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="date" content="2016-03-21" />
+<meta name="date" content="2016-03-29" />
 
 <title>Introduction to rdnb</title>
 
@@ -62,7 +62,7 @@ img {
 
 <div id="header">
 <h1 class="title">Introduction to rdnb</h1>
-<h4 class="date"><em>2016-03-21</em></h4>
+<h4 class="date"><em>2016-03-29</em></h4>
 </div>
 
 
@@ -79,7 +79,9 @@ img {
 </div>
 <div id="package-install" class="section level3">
 <h3>Package install</h3>
-<p><code>rdnb</code> is available on GitHub. The <code>devtools</code>-package is required for installation.</p>
+<p><code>diezeit</code> is available on CRAN and GitHub. Install from CRAN:</p>
+<pre class="r"><code>install.packages(&quot;rdnb&quot;)</code></pre>
+<p>To install the development version from GitHub the <code>devtools</code>-package is required.</p>
 <pre class="r"><code>if(packageVersion(&quot;devtools&quot;) &lt; 1.6) {
   install.packages(&quot;devtools&quot;)
 }
@@ -178,7 +180,7 @@ set.of.languages &lt;- dnb_search(title=c(&quot;cat&quot;, &quot;katze&quot;), l
 <p>Use the <code>limit</code> parameter to set the number and optionally the starting point of the results returned. A single integer value (possible values: 1-100) specifies the number of results only. Use a vector of two integer values to specify the number of results (first value of vector) and the first result (1 or higher). Set <code>limit</code> to “all” for a complete list of results.</p>
 <pre class="r"><code>first.result &lt;- dnb_search(title=&quot;katze&quot;, limit=1)
 five.results.starting.with.the.21st &lt;- dnb_search(title=&quot;katze&quot;, limit=c(5, 21))
-all.results &lt;- dnb_search(title=&quot;katze&quot;, limit=&quot;all&quot;)</code></pre>
+all.results &lt;- dnb_search(title=&quot;katze&quot;, year=2016, limit=&quot;all&quot;)</code></pre>
 </div>
 <div id="results" class="section level5">
 <h5>Results</h5>
@@ -206,17 +208,17 @@ all.results &lt;- dnb_search(title=&quot;katze&quot;, limit=&quot;all&quot;)</co
 #&gt; 8                     Michie, David (aut); Lang, Kurt (trl); Michie, David
 #&gt; 9                                   Fox, Diane (aut); Fox, Christyan (aut)
 #&gt; 10                                                  Poe, Edgar Allan (aut)
-#&gt;                                                                                                     title
-#&gt; 1                                                               Alice, der Klimawandel und die Katze Zeta
-#&gt; 2                                                      Bildermaus – Der kleine Fuchs und die freche Katze
-#&gt; 3                                                               \u0098Der\u009c Tag, an dem die Katze kam
-#&gt; 4                                                                                Dermatologie-Atlas Katze
-#&gt; 5                                                                                    Dicke Katze 2017 A&amp;I
-#&gt; 6                                                                                    Dicke Katze 2017 A&amp;I
-#&gt; 7                                                           \u0098Die\u009c drei ??? und der Karpatenhund
-#&gt; 8                                     \u0098Die\u009c Katze des Dalai Lama und der Zauber des Augenblicks
+#&gt;                                                                                                      title
+#&gt; 1                                                                Alice, der Klimawandel und die Katze Zeta
+#&gt; 2                                                       Bildermaus – Der kleine Fuchs und die freche Katze
+#&gt; 3                                                                \u0098Der\u009c Tag, an dem die Katze kam
+#&gt; 4                                                                                 Dermatologie-Atlas Katze
+#&gt; 5                                                                                     Dicke Katze 2017 A&amp;I
+#&gt; 6                                                                                     Dicke Katze 2017 A&amp;I
+#&gt; 7                                                            \u0098Die\u009c drei ??? und der Karpatenhund
+#&gt; 8                                      \u0098Die\u009c Katze des Dalai Lama und der Zauber des Augenblicks
 #&gt; 9  \u0098Die\u009c Katze, der Hund, Rotkäppchen, die explodierenden Eier, der Wolf und Omas Kleiderschrank
-#&gt; 10                                                                         \u0098Die\u009c schwarze Katze
+#&gt; 10                                                                          \u0098Die\u009c schwarze Katze
 #&gt;                                           subtitle
 #&gt; 1                                             &lt;NA&gt;
 #&gt; 2                                             &lt;NA&gt;
@@ -231,12 +233,12 @@ all.results &lt;- dnb_search(title=&quot;katze&quot;, limit=&quot;all&quot;)</co
 #&gt;                                              publisher   year language
 #&gt; 1                              Edition Rugerup, Berlin   2016      ger
 #&gt; 2                                      Loewe, Bindlach   2016      ger
-#&gt; 3                                      Egmont LYX, Köln   2016      ger
+#&gt; 3                                     Egmont LYX, Köln   2016      ger
 #&gt; 4                                      Enke, Stuttgart   2016      ger
 #&gt; 5  teNeues Calendars &amp; Stationery, Kempen, Niederrhein   2016      ger
 #&gt; 6  teNeues Calendars &amp; Stationery, Kempen, Niederrhein   2016      ger
-#&gt; 7        Sony Music Entertainment Germany GmbH, München [2016]      ger
-#&gt; 8                                        Lotos, München   2016      ger
+#&gt; 7       Sony Music Entertainment Germany GmbH, München [2016]      ger
+#&gt; 8                                       Lotos, München   2016      ger
 #&gt; 9                      Freies Geistesleben , Stuttgart   2016      ger
 #&gt; 10                     fabula Verlag Hamburg , Hamburg   2016      ger
 #&gt;             isbn
@@ -251,7 +253,7 @@ all.results &lt;- dnb_search(title=&quot;katze&quot;, limit=&quot;all&quot;)</co
 #&gt; 9  9783772527913
 #&gt; 10 9783958554276
 #&gt;                                                                          price
-#&gt; 1                                 Festeinband : EUR 22.60 (AT), EUR 21.90 (DE)
+#&gt; 1                                      Gewebe : EUR 22.60 (AT), EUR 21.90 (DE)
 #&gt; 2                                           Gb. : EUR 8.20 (AT), EUR 7.95 (DE)
 #&gt; 3                Kart. : EUR 10.30 (AT), sfr 13.50 (freier Pr.), EUR 9.99 (DE)
 #&gt; 4  Broschiert (FH) : EUR 92.60 (AT), sfr 103.00 (freier Preis), EUR 89.99 (DE)
@@ -262,7 +264,7 @@ all.results &lt;- dnb_search(title=&quot;katze&quot;, limit=&quot;all&quot;)</co
 #&gt; 9                                 Gb. : ca. EUR 16.40 (AT), ca. EUR 15.90 (DE)
 #&gt; 10         Broschur : EUR 12.90 (AT), sfr 16.00 (freier Preis), EUR 12.90 (DE)
 #&gt;         pages                 format                         edition
-#&gt; 1  278 Seiten 21.5 cm x 17 cm, 650 g                    neue Ausgabe
+#&gt; 1  278 Seiten 21.5 cm x 17 cm, 650 g                      1. Auflage
 #&gt; 2       48 S.        24.5 cm x 18 cm                            &lt;NA&gt;
 #&gt; 3      320 S.        18 cm x 12.4 cm                            &lt;NA&gt;
 #&gt; 4  304 Seiten          24 cm x 17 cm                      1. Auflage
@@ -386,8 +388,8 @@ all.results &lt;- dnb_search(title=&quot;katze&quot;, limit=&quot;all&quot;)</co
 </table>
 <p>The total number of records found by the request is stored in the attribute “number_of_records”:</p>
 <pre class="r"><code>attr(cats, &quot;number_of_records&quot;)
-#&gt; [1] 5545</code></pre>
-<p>and the query can be viewed by calling the “query”-attribute:</p>
+#&gt; [1] 5546</code></pre>
+<p>and the query itself can be viewed by calling the “query”-attribute:</p>
 <pre class="r"><code>attr(cats, &quot;query&quot;)
 #&gt; [1] &quot;(tit=katze)&quot;</code></pre>
 <p>You can use this query directly with the <code>dnb_advanced</code> function.</p>
@@ -395,8 +397,9 @@ all.results &lt;- dnb_search(title=&quot;katze&quot;, limit=&quot;all&quot;)</co
 </div>
 <div id="advanced-search---dnb_advanced" class="section level4">
 <h4>Advanced search - <code>dnb_advanced</code></h4>
-<p><code>dnb_advanced</code> allows for complex requests in</p>
-<pre class="r"><code>cats &lt;- dnb_advanced(&quot;(tit=katze OR tit=kater NOT tit=hund) AND jhr&gt;2000 AND mat=books AND spr=ger&quot;)</code></pre>
+<p><code>dnb_advanced</code> allows for complex requests using the Contextual Query Language (CQL). See the <a href="http://www.dnb.de/EN/Header/Hilfe/kataloghilfeExpertensuche.html">DNB advanced search help pages</a> for available indices and a list of examples.</p>
+<p>The following advanced search returns a list of german or english children’s books titled with ‘cat’, excluding titles containing ‘dog’, since the year 2001:</p>
+<pre class="r"><code>cats &lt;- dnb_advanced(&quot;( (tit=katze OR tit=kater NOT tit=hund) OR (tit=cat NOT tit=dog) ) AND jhr&gt;2000 AND mat=books AND (spr=ger OR spr=eng) AND sgt=K&quot;, limit=&quot;all&quot;)</code></pre>
 </div>
 </div>
 
