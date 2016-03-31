@@ -21,7 +21,7 @@ If you do not want to enter your token for each R session, put the following in 
 
 ### Package install
 
-`diezeit` is available on CRAN and GitHub. Install from CRAN:
+`rdnb` is available on CRAN and GitHub. Install from CRAN:
 
 
 ```r
