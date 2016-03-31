@@ -4,9 +4,9 @@ citEntry(entry = "Manual",
          title = "rdnb: R interface to the Deutsche Nationalbibliohek (German National Library) API",
          author = "Christian Graul",
          year = "2016",
-         url = "http://cran.r-project.org/package=rdnb",
+         url = "https://cran.r-project.org/package=rdnb",
          note = "R package version 0.1-0",
-         textVersion = "Graul, Christian (2016): rdnb: R interface to the Deutsche Nationalbibliohek (German National Library) API. R package version 0.1-0, http://cran.r-project.org/package=rdnb.")
+         textVersion = "Graul, Christian (2016): rdnb: R interface to the Deutsche Nationalbibliohek (German National Library) API. R package version 0.1-0, https://cran.r-project.org/package=rdnb.")
 
 citFooter("Please cite both 'rdnb' and R when using 'rdnb'.",
           "For R citation, see ", sQuote("citation()"))

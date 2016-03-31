@@ -9,7 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="date" content="2016-03-29" />
+<meta name="date" content="2016-03-31" />
 
 <title>Introduction to rdnb</title>
 
@@ -62,13 +62,13 @@ img {
 
 <div id="header">
 <h1 class="title">Introduction to rdnb</h1>
-<h4 class="date"><em>2016-03-29</em></h4>
+<h4 class="date"><em>2016-03-31</em></h4>
 </div>
 
 
 <div id="about-the-package" class="section level3">
 <h3>About the package</h3>
-<p><code>rdnb</code> is an R wrapper for the Deutsche Nationalbibliohek (German National Library) API, available at <a href="http://www.dnb.de" class="uri">http://www.dnb.de</a>. As the German central archival library, the German National Library is collecting, archiving, bibliographically classifying all German and German-language publications from 1913, foreign publications about Germany, translations of German works, and the works of German-speaking emigrants published abroad between 1933 and 1945.</p>
+<p><code>rdnb</code> is an R wrapper for the Deutsche Nationalbibliothek (German National Library) API, available at <a href="http://www.dnb.de" class="uri">http://www.dnb.de</a>. As the German central archival library, the German National Library is collecting, archiving, bibliographically classifying all German and German-language publications from 1913, foreign publications about Germany, translations of German works, and the works of German-speaking emigrants published abroad between 1933 and 1945.</p>
 <p>All bibliographic data of the German National Library are provided free of charge and can be freely re-used under “Creative Commons Zero” (<a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en">CC0 1.0</a>) terms. The metadata and online interfaces are provided with no guarantee of their being continuous, punctual, error-free or complete, or of their not infringing the rights of third parties (e.g. personal rights and copyright).</p>
 <p>A personal access token is required for usage and can be requested by sending an e-mail to the Interface Service (<a href="mailto:schnittstellen-service@dnb.de">schnittstellen-service@dnb.de</a>). The e-mail must include the required catalogue “Catalogue of German National Library (DNB) / Katalog der Deutschen Nationalbibliothek (DNB)” and the access option “via access token / über Zugangscode”.</p>
 <p>If you do not want to enter your token for each R session, put the following in your .Renviron or .Rprofile file: <code>DNB_TOKEN=PUTYOURTOKENHERE</code>.</p>
@@ -388,7 +388,7 @@ all.results &lt;- dnb_search(title=&quot;katze&quot;, year=2016, limit=&quot;all
 </table>
 <p>The total number of records found by the request is stored in the attribute “number_of_records”:</p>
 <pre class="r"><code>attr(cats, &quot;number_of_records&quot;)
-#&gt; [1] 5546</code></pre>
+#&gt; [1] 5547</code></pre>
 <p>and the query itself can be viewed by calling the “query”-attribute:</p>
 <pre class="r"><code>attr(cats, &quot;query&quot;)
 #&gt; [1] &quot;(tit=katze)&quot;</code></pre>
