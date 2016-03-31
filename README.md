@@ -1,4 +1,6 @@
-# Introduction to rdnb
+# rdnb
+
+An R interface to the Deutsche Nationalbibliothek (German National Library) API
 
 
 ### About the package
