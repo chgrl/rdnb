@@ -165,9 +165,10 @@ dnb_advanced <- function(query, limit=10, print=FALSE) {
   
   # print number of records
 	nrec <- as.numeric(raw[["numberOfRecords"]])
-	if(any(limit=="all") || nrec==0) message(nrec, " records found")
-	else message(nrec, " records found (request limited to ", lim, " records)")
-	if(nrec==0) return(NULL)
+	if(nrec==0) {
+		message("no records found")
+		return(NULL)
+	}
   
   # convert
   df <- dnb_to_df(raw)
@@ -185,6 +186,10 @@ dnb_advanced <- function(query, limit=10, print=FALSE) {
 			strt <- as.numeric(raw[["nextRecordPosition"]])
 		}
 	}
+	
+	# print number of records
+	if(any(limit=="all")) message(nrec, " records found")
+	else message(nrec, " records found (request limited to ", lim, " records)")
 	
 	# add metadata
 	attr(df, "number_of_records") <- nrec
