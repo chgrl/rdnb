@@ -8,6 +8,7 @@
 #' @param type the type of publication (optional), one or a vector of \code{articles}, \code{manuscript}, \code{biographicaldoc}, \code{letters}, \code{bequest}, \code{collections}, \code{books}, \code{brailles}, \code{maps}, \code{discs}, \code{dissertations}, \code{online}, \code{films}, \code{microfiches}, \code{multimedia}, \code{music}, \code{scores}, \code{serials}, \code{persons}, \code{subjects}, \code{corperations}, \code{works}, \code{events}, \code{geographics}.
 #' @param language the language of the work by ISO 639-2/B code (\url{http://www.dnb.de/SharedDocs/Downloads/DE/DNB/standardisierung/inhaltserschliessung/sprachenCodesEnglisch.pdf?__blob=publicationFile}); single string value or vector of strings.
 #' @param limit number and (optional) starting point of results returned; single integer value (number of results, 1--100), vector of two integer values (number of results and first result, >=1) or \code{"all"} for a complete list of results.
+#' @param clean if \code{TRUE} (the default), the results are cleaned (see \code{\link{dnb_advanced}} for details).
 #' @param print if \code{TRUE} the search results are printed (default is \code{FALSE}).
 #' @return A list of results with metadata.
 #' @details to do
@@ -53,7 +54,7 @@
 #' 5.results.starting.with.the.21st <- dnb_search(title="katze", limit=c(5, 21))
 #' all.results <- dnb_search(title="katze", limit="all")
 #' }
-dnb_search <- function(title, author, year, publisher, keyword, type, language, limit=10, print=FALSE) {		
+dnb_search <- function(title, author, year, publisher, keyword, type, language, limit=10, clean=TRUE, print=FALSE) {		
 	# init query
 	query <- ""
 	
@@ -121,7 +122,7 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 	}
 	
 	# call dnb_advanced
-	df <- dnb_advanced(query=query, limit=limit, print=FALSE)
+	df <- dnb_advanced(query=query, limit=limit, clean=clean, print=FALSE)
   
   # return
   if(print) print(df)
@@ -133,9 +134,41 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 #' @description \code{dnb_search} exposes a search in the DNB catalogue, expressed in the DNB query language. 
 #' @param query the search query, expressed in the DNB query language; single string value. 
 #' @param limit number and (optional) starting point of results returned; single integer value (number of results, 1--100), vector of two integer values (number of results and first result, >=1) or \code{"all"} for a complete list of results.
+#' @param clean if \code{TRUE} (the default), the results are cleaned (see below for details).
 #' @param print if \code{TRUE} the search results are printed (default is \code{FALSE}).
 #' @return A \code{data.frame} of results with metadata.
-#' @details to do
+#' @details \emph{Cleaning of results}
+#' To harmonise the results, some clutter is deleted and abbreviations frequently used in the dnb catalogue are replaced by full words. Here is a list of all replacements:
+#' \tabular{lll}{
+#' Variable \tab Searched \tab Replaced by \cr
+#' complete dataset \tab \\u0098 \tab [deleted] \cr
+#' complete dataset \tab \\u009c \tab [deleted] \cr
+#' complete dataset \tab ,, \tab , \cr
+#' complete dataset \tab .. \tab . \cr
+#' complete dataset \tab ;; \tab ; \cr
+#' year \tab [string] \tab [numeric] \cr
+#' pages \tab  S. \tab [deleted] \cr
+#' pages \tab  Seiten \tab [deleted] \cr
+#' pages \tab [ \tab [deleted] \cr
+#' pages \tab ] \tab [deleted] \cr
+#' publisher \tab Verl. \tab Verlag \cr
+#' publisher \tab verl. \tab verlag \cr
+#' publisher \tab [ \tab [deleted] \cr
+#' publisher \tab ] \tab [deleted] \cr
+#' edition \tab Aufl. \tab Auflage \cr
+#' edition \tab aufl. \tab auflage \cr
+#' edition \tab Orig. \tab Original \cr
+#' edition \tab Ausg. \tab Ausgabe \cr
+#' edition \tab ausg. \tab ausgabe \cr
+#' edition \tab Erw. \tab Erweiterte \cr
+#' edition \tab erw. \tab erweiterte \cr
+#' edition \tab [ \tab [deleted] \cr
+#' edition \tab ] \tab [deleted] \cr
+#' price \tab kart. \tab Kartoniert \cr
+#' price \tab Gb. \tab Gebunden \cr
+#' price \tab Spiralb. \tab Spiralbindung \cr
+#' price \tab Pb. \tab Paperback
+#' }
 #' @source \url{http://www.dnb.de/EN/Service/DigitaleDienste/SRU/sru_node.html}
 #' @export
 #' @examples
@@ -144,7 +177,7 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 #' # excluding titles containing dogs, since the year 2001
 #' cats <- dnb_advanced("(tit=katze OR tit=kater NOT tit=hund) AND jhr>2000 AND mat=books AND spr=ger")
 #' }
-dnb_advanced <- function(query, limit=10, print=FALSE) {		
+dnb_advanced <- function(query, limit=10, clean=TRUE, print=FALSE) {		
 	# prepare limit
 	if(any(limit=="all")) {
 		lim <- 100
@@ -171,7 +204,7 @@ dnb_advanced <- function(query, limit=10, print=FALSE) {
 	}
   
   # convert
-  df <- dnb_to_df(raw)
+  df <- dnb_to_df(raw, clean=clean)
   
   # loop request for all records
 	if(any(limit=="all")) {
@@ -181,7 +214,7 @@ dnb_advanced <- function(query, limit=10, print=FALSE) {
 			if(strt>nrec) break
 			req <- dnb_get_url(path="sru/dnb", query=query, limit=lim, start=strt)
 			raw <- dnb_parse(req)
-			df_add <- dnb_to_df(raw)
+			df_add <- dnb_to_df(raw, clean=clean)
 			df <- rbind(df, df_add)
 			strt <- as.numeric(raw[["nextRecordPosition"]])
 		}

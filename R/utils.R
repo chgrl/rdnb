@@ -40,7 +40,7 @@ dnb_token <- function(force=FALSE) {
 }
 
 
-dnb_to_df <- function(lst) {
+dnb_to_df <- function(lst, clean) {
 	# prepare data.frame
 	nrec <- length(lst$records)
 	df <- data.frame(matrix(nrow=nrec, ncol=17))
@@ -137,13 +137,48 @@ dnb_to_df <- function(lst) {
 	}
 	
 	# clean data
-	df <- as.data.frame(sapply(df, gsub, pattern="\u0098", replacement="", fixed=TRUE), stringsAsFactors=FALSE)
-	df <- as.data.frame(sapply(df, gsub, pattern="\u009c", replacement="", fixed=TRUE), stringsAsFactors=FALSE)
-	df$year <- sapply(df$year, gsub, pattern="[^0-9]", replacement="")
-	df$year <- as.numeric(df$year)
-	df$pages <- sapply(df$pages, gsub, pattern=" S.", replacement="", fixed=TRUE)
-	df$pages <- sapply(df$pages, gsub, pattern=" Seiten", replacement="", fixed=TRUE)
-	df$edition <- sapply(df$edition, gsub, pattern="Aufl.", replacement="Auflage", fixed=TRUE)	
-	
+	if(clean) {
+		df <- as.data.frame(sapply(df, gsub, pattern="\\u0098", replacement="", fixed=TRUE), stringsAsFactors=FALSE)
+		df <- as.data.frame(sapply(df, gsub, pattern="\\u009c", replacement="", fixed=TRUE), stringsAsFactors=FALSE)
+		df <- as.data.frame(sapply(df, gsub, pattern=",,", replacement=",", fixed=TRUE), stringsAsFactors=FALSE)
+		df <- as.data.frame(sapply(df, gsub, pattern="..", replacement=".", fixed=TRUE), stringsAsFactors=FALSE)
+		df <- as.data.frame(sapply(df, gsub, pattern=";;", replacement=";", fixed=TRUE), stringsAsFactors=FALSE)
+		df$year <- sapply(df$year, gsub, pattern="[^0-9]", replacement="")
+		df$year <- as.numeric(df$year)
+		df$pages <- sapply(df$pages, gsub, pattern=" S.", replacement="", fixed=TRUE)
+		df$pages <- sapply(df$pages, gsub, pattern=" Seiten", replacement="", fixed=TRUE)
+		df$pages <- sapply(df$pages, gsub, pattern="[", replacement="", fixed=TRUE)
+		df$pages <- sapply(df$pages, gsub, pattern="]", replacement="", fixed=TRUE)
+		df$publisher <- sapply(df$publisher, gsub, pattern="Verl.", replacement="Verlag", fixed=TRUE)
+		df$publisher <- sapply(df$publisher, gsub, pattern="verl.", replacement="verlag", fixed=TRUE)
+		df$publisher <- sapply(df$publisher, gsub, pattern="[", replacement="", fixed=TRUE)
+		df$publisher <- sapply(df$publisher, gsub, pattern="]", replacement="", fixed=TRUE)
+		df$edition <- sapply(df$edition, gsub, pattern="Aufl.", replacement="Auflage", fixed=TRUE)
+		df$edition <- sapply(df$edition, gsub, pattern="aufl.", replacement="auflage", fixed=TRUE)
+		df$edition <- sapply(df$edition, gsub, pattern="Orig.", replacement="Original", fixed=TRUE)
+		#df$edition <- sapply(df$edition, gsub, pattern="Ver\u00F6ff.", replacement="Ver\u00F6ffentlichung", fixed=TRUE)
+		#df$edition <- sapply(df$edition, gsub, pattern="ver\u00F6ff.", replacement="ver\u00F6ffentlichung", fixed=TRUE)
+		df$edition <- sapply(df$edition, gsub, pattern="Ausg.", replacement="Ausgabe", fixed=TRUE)
+		df$edition <- sapply(df$edition, gsub, pattern="ausg.", replacement="ausgabe", fixed=TRUE)
+		#df$edition <- sapply(df$edition, gsub, pattern="Vollst.", replacement="Vollst\u00E4ndige", fixed=TRUE)
+		#df$edition <- sapply(df$edition, gsub, pattern="vollst.", replacement="vollst\u00E4ndige", fixed=TRUE)
+		#df$edition <- sapply(df$edition, gsub, pattern="\u00DCberarb.", replacement="\u00DCberarbeitete", fixed=TRUE)
+		#df$edition <- sapply(df$edition, gsub, pattern="\u00FCberarb.", replacement="\u00FCberarbeitete", fixed=TRUE)
+		df$edition <- sapply(df$edition, gsub, pattern="Erw.", replacement="Erweiterte", fixed=TRUE)
+		df$edition <- sapply(df$edition, gsub, pattern="erw.", replacement="erweiterte", fixed=TRUE)
+		#df$edition <- sapply(df$edition, gsub, pattern="Erg.", replacement="Erg\u00E4nzte", fixed=TRUE)
+		#df$edition <- sapply(df$edition, gsub, pattern="erg.", replacement="erg\u00E4nzte", fixed=TRUE)
+		#df$edition <- sapply(df$edition, gsub, pattern="Ungek.", replacement="Ungek\u00FCrzte", fixed=TRUE)
+		#df$edition <- sapply(df$edition, gsub, pattern="ungek.", replacement="ungek\u00FCrzte", fixed=TRUE)
+		#df$edition <- sapply(df$edition, gsub, pattern="Ver\u00E4nd.", replacement="Ver\u00E4nderte", fixed=TRUE)
+		#df$edition <- sapply(df$edition, gsub, pattern="ver\u00E4nd.", replacement="ver\u00E4nderte", fixed=TRUE)
+		df$edition <- sapply(df$edition, gsub, pattern="[", replacement="", fixed=TRUE)
+		df$edition <- sapply(df$edition, gsub, pattern="]", replacement="", fixed=TRUE)
+		df$price <- sapply(df$price, gsub, pattern="kart.", replacement="Kartoniert", fixed=TRUE)
+		df$price <- sapply(df$price, gsub, pattern="Gb.", replacement="Gebunden", fixed=TRUE)
+		df$price <- sapply(df$price, gsub, pattern="Spiralb.", replacement="Spiralbindung", fixed=TRUE)
+		df$price <- sapply(df$price, gsub, pattern="Pb.", replacement="Paperback", fixed=TRUE)
+	}
+		
 	return(df)
 }
