@@ -208,7 +208,6 @@ dnb_advanced <- function(query, limit=10, clean=TRUE, print=FALSE) {
   
   # loop request for all records
 	if(any(limit=="all")) {
-		nrec <- as.numeric(raw[["numberOfRecords"]])
 		strt <- as.numeric(raw[["nextRecordPosition"]])
 		repeat{
 			if(strt>nrec) break
