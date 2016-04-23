@@ -209,6 +209,7 @@ dnb_advanced <- function(query, limit=10, clean=TRUE, print=FALSE) {
   # loop request for all records
 	if(any(limit=="all")) {
 		strt <- as.numeric(raw[["nextRecordPosition"]])
+		pb <- txtProgressBar(min=0, max=nrec, style=3)
 		repeat{
 			if(strt>nrec) break
 			req <- dnb_get_url(path="sru/dnb", query=query, limit=lim, start=strt)
@@ -216,7 +217,10 @@ dnb_advanced <- function(query, limit=10, clean=TRUE, print=FALSE) {
 			df_add <- dnb_to_df(raw, clean=clean)
 			df <- rbind(df, df_add)
 			strt <- as.numeric(raw[["nextRecordPosition"]])
+			setTxtProgressBar(pb, strt)
 		}
+		setTxtProgressBar(pb, nrec)
+		close(pb)
 	}
 	
 	# print number of records
