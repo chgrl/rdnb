@@ -8,7 +8,7 @@ An R interface to the Deutsche Nationalbibliothek (German National Library) API
 
 ### About the package
 
-`rdnb` is an R wrapper for the Deutsche Nationalbibliothek (German National Library) API, available at http://www.dnb.de. As the German central archival library, the German National Library is collecting, archiving, bibliographically classifying all German and German-language publications from 1913, foreign publications about Germany, translations of German works, and the works of German-speaking emigrants published abroad between 1933 and 1945.
+`rdnb` is an R wrapper for the Deutsche Nationalbibliothek (German National Library) API, available at http://www.dnb.de. As the German central archival library, the German National Library is collecting, archiving, bibliographically classifying all German and German-language publications, foreign publications about Germany, translations of German works, and the works of German-speaking emigrants published abroad between 1933 and 1945.
 
 All bibliographic data of the German National Library are provided free of charge and can be freely re-used under "Creative Commons Zero" ([CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/deed.en)) terms. The metadata and online interfaces are provided with no guarantee of their being continuous, punctual, error-free or complete, or of their not infringing the rights of third parties (e.g. personal rights and copyright).
 
