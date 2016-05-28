@@ -25,7 +25,7 @@ dnb_search(title, author, year, publisher, keyword, type, language,
 
 \item{language}{the language of the work by ISO 639-2/B code (\url{http://www.dnb.de/SharedDocs/Downloads/DE/DNB/standardisierung/inhaltserschliessung/sprachenCodesEnglisch.pdf?__blob=publicationFile}); single string value or vector of strings.}
 
-\item{limit}{number and (optional) starting point of results returned; single integer value (number of results, 1--100), vector of two integer values (number of results and first result, >=1) or \code{"all"} for a complete list of results.}
+\item{limit}{number and (optional) starting point of results returned; single integer value (number of results), vector of two integer values (number of results and first result, >=1) or \code{"all"} for a complete list of results.}
 
 \item{clean}{if \code{TRUE} (the default), the results are cleaned (see \code{\link{dnb_advanced}} for details).}
 

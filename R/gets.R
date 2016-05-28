@@ -7,7 +7,7 @@
 #' @param keyword one or a set of keywords describing the work (subjects, persons, locations, organisations, etc.); optional single string value or vector of strings.
 #' @param type the type of publication (optional), one or a vector of \code{articles}, \code{manuscript}, \code{biographicaldoc}, \code{letters}, \code{bequest}, \code{collections}, \code{books}, \code{brailles}, \code{maps}, \code{discs}, \code{dissertations}, \code{online}, \code{films}, \code{microfiches}, \code{multimedia}, \code{music}, \code{scores}, \code{serials}, \code{persons}, \code{subjects}, \code{corperations}, \code{works}, \code{events}, \code{geographics}.
 #' @param language the language of the work by ISO 639-2/B code (\url{http://www.dnb.de/SharedDocs/Downloads/DE/DNB/standardisierung/inhaltserschliessung/sprachenCodesEnglisch.pdf?__blob=publicationFile}); single string value or vector of strings.
-#' @param limit number and (optional) starting point of results returned; single integer value (number of results, 1--100), vector of two integer values (number of results and first result, >=1) or \code{"all"} for a complete list of results.
+#' @param limit number and (optional) starting point of results returned; single integer value (number of results), vector of two integer values (number of results and first result, >=1) or \code{"all"} for a complete list of results.
 #' @param clean if \code{TRUE} (the default), the results are cleaned (see \code{\link{dnb_advanced}} for details).
 #' @param print if \code{TRUE} the search results are printed (default is \code{FALSE}).
 #' @return A list of results with metadata.
@@ -133,7 +133,7 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 #' @title Search the DNB catalogue - advanced search
 #' @description \code{dnb_search} exposes a search in the DNB catalogue, expressed in the DNB query language. 
 #' @param query the search query, expressed in the DNB query language; single string value. 
-#' @param limit number and (optional) starting point of results returned; single integer value (number of results, 1--100), vector of two integer values (number of results and first result, >=1) or \code{"all"} for a complete list of results.
+#' @param limit number and (optional) starting point of results returned; single integer value (number of results), vector of two integer values (number of results and first result, >=1) or \code{"all"} for a complete list of results.
 #' @param clean if \code{TRUE} (the default), the results are cleaned (see below for details).
 #' @param print if \code{TRUE} the search results are printed (default is \code{FALSE}).
 #' @return A \code{data.frame} of results with metadata.
@@ -206,12 +206,18 @@ dnb_advanced <- function(query, limit=10, clean=TRUE, print=FALSE) {
   # convert
   df <- dnb_to_df(raw, clean=clean)
   
-  # loop request for all records
-	if(any(limit=="all")) {
+  # loop request for more than 100 records
+	nend <- NULL
+	if(any(limit=="all") || lim>100) {
+		if(any(limit=="all")) nend <- nrec
+		else {
+			nend <- lim
+			lim <- 100
+		}
 		strt <- as.numeric(raw[["nextRecordPosition"]])
-		pb <- txtProgressBar(min=0, max=nrec, style=3)
+		pb <- txtProgressBar(min=0, max=nend, style=3)
 		repeat{
-			if(strt>nrec) break
+			if(strt>nend) break
 			req <- dnb_get_url(path="sru/dnb", query=query, limit=lim, start=strt)
 			raw <- dnb_parse(req)
 			df_add <- dnb_to_df(raw, clean=clean)
@@ -219,14 +225,17 @@ dnb_advanced <- function(query, limit=10, clean=TRUE, print=FALSE) {
 			strt <- as.numeric(raw[["nextRecordPosition"]])
 			setTxtProgressBar(pb, strt)
 		}
-		setTxtProgressBar(pb, nrec)
+		setTxtProgressBar(pb, nend)
 		close(pb)
+		if(!any(limit=="all")) df <- df[1:nend,]
 	}
 	
 	# print number of records
 	if(any(limit=="all")) message(nrec, " records found")
-	else message(nrec, " records found (request limited to ", lim, " records)")
-	
+	else {
+		if(!is.null(nend)) message(nrec, " records found (request limited to ", nend, " records)")
+		else message(nrec, " records found (request limited to ", lim, " records)")
+	}
 	# add metadata
 	attr(df, "number_of_records") <- nrec
 	attr(df, "query") <- unlist(raw[["echoedSearchRetrieveRequest"]][["query"]])
