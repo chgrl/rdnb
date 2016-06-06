@@ -138,11 +138,13 @@ dnb_to_df <- function(lst, clean) {
 	
 	# clean data
 	if(clean) {
-		df <- as.data.frame(sapply(df, gsub, pattern="\u0098", replacement="", fixed=TRUE), stringsAsFactors=FALSE)
-		df <- as.data.frame(sapply(df, gsub, pattern="\u009c", replacement="", fixed=TRUE), stringsAsFactors=FALSE)
-		df <- as.data.frame(sapply(df, gsub, pattern=",,", replacement=",", fixed=TRUE), stringsAsFactors=FALSE)
-		df <- as.data.frame(sapply(df, gsub, pattern="..", replacement=".", fixed=TRUE), stringsAsFactors=FALSE)
-		df <- as.data.frame(sapply(df, gsub, pattern=";;", replacement=";", fixed=TRUE), stringsAsFactors=FALSE)
+		if(nrow(df)>1) {
+			df <- as.data.frame(sapply(df, gsub, pattern="\u0098", replacement="", fixed=TRUE), stringsAsFactors=FALSE)
+			df <- as.data.frame(sapply(df, gsub, pattern="\u009c", replacement="", fixed=TRUE), stringsAsFactors=FALSE)
+			df <- as.data.frame(sapply(df, gsub, pattern=",,", replacement=",", fixed=TRUE), stringsAsFactors=FALSE)
+			df <- as.data.frame(sapply(df, gsub, pattern="..", replacement=".", fixed=TRUE), stringsAsFactors=FALSE)
+			df <- as.data.frame(sapply(df, gsub, pattern=";;", replacement=";", fixed=TRUE), stringsAsFactors=FALSE)
+		}
 		df$year <- sapply(df$year, gsub, pattern="[^0-9]", replacement="")
 		df$year <- as.numeric(df$year)
 		df$pages <- sapply(df$pages, gsub, pattern=" S.", replacement="", fixed=TRUE)
