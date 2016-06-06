@@ -91,8 +91,11 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 	# prepare publisher
 	if(!missing(publisher)) {
 		publisher <- paste0("vlg=", publisher, collapse=" OR ")
+		publisher <- gsub("OR vlg=+", "AND vlg=", publisher, fixed=TRUE)
+		publisher <- gsub("OR vlg=-", "NOT vlg=", publisher, fixed=TRUE)
+		if(substr(publisher, 1, 5)=="vlg=+" || substr(publisher, 1, 5)=="vlg=-") stop("Do not use '+' or '-' in case of a single search string or with first string of a vector")
 		if(query=="") query <- paste0("(", publisher, ")")
-		else query <- paste(query, paste0("(", publisher, ")"), sep=" AND ")
+		else query <- paste(query, paste0("(", publisher, ")"), sep=" AND ") 
 	}
 	
 	# prepare keyword
