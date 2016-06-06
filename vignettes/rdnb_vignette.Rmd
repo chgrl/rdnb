@@ -1,4 +1,8 @@
 # Introduction to rdnb
+`r Sys.Date()`  
+
+
+
 
 
 ### About the package
@@ -96,13 +100,15 @@ set.of.years <- dnb_search(title="katze", year=c(2010:2013, 2015))
 
 ##### Search for publisher
 
-Publisher name and/or location may be limited by the `publisher` parameter. A vector of string values is combined by "OR".
+Publisher name and/or location may be limited by the `publisher` parameter. Logical operators can be set as explained above.
 
 
 ```r
 single.publisher <- dnb_search(title="katze", publisher="kiepenheuer")
-single.publisher.location <- dnb_search(title="katze", publisher="*verlag leipzig")
-set.of.publishers <- dnb_search(title="katze", publisher=c("kiepenheuer", "piper"))
+single.publisher.location <- dnb_search(title="katze", publisher="*verlag leipzig*")
+pub.or.pub <- dnb_search(title="katze", publisher=c("kiepenheuer", "piper"))
+pub.and.pub <- dnb_search(title="katze", publisher=c("*kinder*", "+*berlin*"))
+pub.not.pub <- dnb_search(title="katze", publisher=c("pi*", "-piper"))
 ```
 
 ##### Search for keyword
@@ -184,126 +190,115 @@ Per default no results are printed. Set `print` to `TRUE` to print the `data.fra
 ```r
 cats <- dnb_search(title="katze", print=TRUE)
 #>            id                        link
-#> 1  1088777961 http://d-nb.info/1088777961
-#> 2  1079083170 http://d-nb.info/1079083170
-#> 3  1078237050 http://d-nb.info/1078237050
-#> 4  1082000671 http://d-nb.info/1082000671
-#> 5  108078571X http://d-nb.info/108078571X
-#> 6  1080780793 http://d-nb.info/1080780793
-#> 7  1085681068 http://d-nb.info/1085681068
-#> 8  107915972X http://d-nb.info/107915972X
-#> 9  1079347178 http://d-nb.info/1079347178
-#> 10 1084797631 http://d-nb.info/1084797631
-#>                                                                     author
-#> 1                                                    Boysen, Margret (aut)
-#> 2                              von Vogel, Maja (aut); Bux, Alexander (ill)
-#> 3                                                    Schacht, Andrea (aut)
-#> 4                                                   Peters, Stefanie (aut)
-#> 5                                                                     <NA>
-#> 6                                                                     <NA>
-#> 7  Francis, H.G. (aut); Pasetti, Peter (nrt); Francis, H.G.; Francis, H.G.
-#> 8                     Michie, David (aut); Lang, Kurt (trl); Michie, David
-#> 9                                   Fox, Diane (aut); Fox, Christyan (aut)
-#> 10                                                  Poe, Edgar Allan (aut)
-#>                                                                                                      title
-#> 1                                                                Alice, der Klimawandel und die Katze Zeta
-#> 2                                                       Bildermaus – Der kleine Fuchs und die freche Katze
-#> 3                                                                \u0098Der\u009c Tag, an dem die Katze kam
-#> 4                                                                                 Dermatologie-Atlas Katze
-#> 5                                                                                     Dicke Katze 2017 A&I
-#> 6                                                                                     Dicke Katze 2017 A&I
-#> 7                                                            \u0098Die\u009c drei ??? und der Karpatenhund
-#> 8                                      \u0098Die\u009c Katze des Dalai Lama und der Zauber des Augenblicks
-#> 9  \u0098Die\u009c Katze, der Hund, Rotkäppchen, die explodierenden Eier, der Wolf und Omas Kleiderschrank
-#> 10                                                                          \u0098Die\u009c schwarze Katze
-#>                                           subtitle
-#> 1                                             <NA>
-#> 2                                             <NA>
-#> 3                    Jennys & Ghizmos zweiter Fall
-#> 4  Krankheitsbilder und typische Verteilungsmuster
-#> 5                                             <NA>
-#> 6                                             <NA>
-#> 7                                             <NA>
-#> 8                                            Roman
-#> 9                                             <NA>
-#> 10                                            <NA>
-#>                                              publisher   year language
-#> 1                              Edition Rugerup, Berlin   2016      ger
-#> 2                                      Loewe, Bindlach   2016      ger
-#> 3                                     Egmont LYX, Köln   2016      ger
-#> 4                                      Enke, Stuttgart   2016      ger
-#> 5  teNeues Calendars & Stationery, Kempen, Niederrhein   2016      ger
-#> 6  teNeues Calendars & Stationery, Kempen, Niederrhein   2016      ger
-#> 7       Sony Music Entertainment Germany GmbH, München [2016]      ger
-#> 8                                       Lotos, München   2016      ger
-#> 9                      Freies Geistesleben , Stuttgart   2016      ger
-#> 10                     fabula Verlag Hamburg , Hamburg   2016      ger
-#>             isbn
-#> 1  9783942955522
-#> 2  9783785582008
-#> 3  9783802598975
-#> 4  9783132194519
-#> 5  4002725785084
-#> 6  4002725784995
-#> 7           <NA>
-#> 8  9783778782620
-#> 9  9783772527913
-#> 10 9783958554276
-#>                                                                          price
-#> 1                                      Gewebe : EUR 22.60 (AT), EUR 21.90 (DE)
-#> 2                                           Gb. : EUR 8.20 (AT), EUR 7.95 (DE)
-#> 3                Kart. : EUR 10.30 (AT), sfr 13.50 (freier Pr.), EUR 9.99 (DE)
-#> 4  Broschiert (FH) : EUR 92.60 (AT), sfr 103.00 (freier Preis), EUR 89.99 (DE)
-#> 5                                                                         <NA>
-#> 6                                                                         <NA>
-#> 7                                                                         <NA>
-#> 8                     : EUR 17.50 (AT), sfr 22.90 (freier Pr.), EUR 16.99 (DE)
-#> 9                                 Gb. : ca. EUR 16.40 (AT), ca. EUR 15.90 (DE)
-#> 10         Broschur : EUR 12.90 (AT), sfr 16.00 (freier Preis), EUR 12.90 (DE)
-#>         pages                 format                         edition
-#> 1  278 Seiten 21.5 cm x 17 cm, 650 g                      1. Auflage
-#> 2       48 S.        24.5 cm x 18 cm                            <NA>
-#> 3      320 S.        18 cm x 12.4 cm                            <NA>
-#> 4  304 Seiten          24 cm x 17 cm                      1. Auflage
-#> 5        <NA>          30 cm x 30 cm                            <NA>
-#> 6        <NA>        45 cm x 19.5 cm                            <NA>
-#> 7       2 CDs                  12 cm        Limitierte Sonderedition
-#> 8      256 S.        20 cm x 12.5 cm                            <NA>
-#> 9       32 S.                   <NA>                        1. Aufl.
-#> 10       <NA>          19 cm x 12 cm 1. Auflage, bearbeitete Ausgabe
-#>    keyword toc
-#> 1       NA  NA
-#> 2       NA  NA
-#> 3       NA  NA
-#> 4       NA  NA
-#> 5       NA  NA
-#> 6       NA  NA
-#> 7       NA  NA
-#> 8       NA  NA
-#> 9       NA  NA
-#> 10      NA  NA
+#> 1  1097774554 http://d-nb.info/1097774554
+#> 2  1097226905 http://d-nb.info/1097226905
+#> 3  1100708146 http://d-nb.info/1100708146
+#> 4  1088777961 http://d-nb.info/1088777961
+#> 5  1098154215 http://d-nb.info/1098154215
+#> 6  1079083170 http://d-nb.info/1079083170
+#> 7  1096497980 http://d-nb.info/1096497980
+#> 8  1100180605 http://d-nb.info/1100180605
+#> 9  1101958081 http://d-nb.info/1101958081
+#> 10 1101959010 http://d-nb.info/1101959010
+#>                                         author
+#> 1                         Kanata, Konami (aut)
+#> 2                           Lehr, Thomas (aut)
+#> 3                      Tinteren, Michael (edt)
+#> 4                        Boysen, Margret (aut)
+#> 5                        Hofmann, Holger (aut)
+#> 6  von Vogel, Maja (aut); Bux, Alexander (ill)
+#> 7                        Schöne, Gerhard (aut)
+#> 8                         Krön, Gabriele (aut)
+#> 9                            Klatt, Arno (aut)
+#> 10                           Klatt, Arno (aut)
+#>                                                                       title
+#> 1                                                 Kleine Katze Chi, Band 11
+#> 2                                                            Nabokovs Katze
+#> 3                                                           2 treue Freunde
+#> 4                                 Alice, der Klimawandel und die Katze Zeta
+#> 5                                                           Bär liebt Katze
+#> 6                        Bildermaus – Der kleine Fuchs und die freche Katze
+#> 7                                                       Bis die Katze bellt
+#> 8                                   Clarabella. Die Katze auf der Orgelbank
+#> 9  Der Luchs - Der Jäger auf leisen Pfoten (Tischkalender 2017 DIN A5 quer)
+#> 10  Der Luchs - Der Jäger auf leisen Pfoten (Wandkalender 2017 DIN A3 quer)
+#>                                                      subtitle
+#> 1                                                        <NA>
+#> 2                                                       Roman
+#> 3                                                Katze & Hund
+#> 4                                                        <NA>
+#> 5                                                        <NA>
+#> 6                                                        <NA>
+#> 7         Verrückte Kinderlieder aus allen Ecken unserer Welt
+#> 8                                             Kleine Episoden
+#> 9  Die Katze mit den Pinselohren. (Monatskalender, 14 Seiten)
+#> 10 Die Katze mit den Pinselohren. (Monatskalender, 14 Seiten)
+#>                             publisher year language          isbn
+#> 1                    Carlsen, Hamburg 2017      ger 9783551742902
+#> 2    dtv Verlagsgesellschaft, München 2017      ger 9783423145497
+#> 3          Coppenrath, Münster, Westf 2016      ger 4050003941981
+#> 4             Edition Rugerup, Berlin 2016      ger 9783942955522
+#> 5  Gringo Comics, Esslingen am Neckar 2016      ger 9783940047564
+#> 6                     Loewe, Bindlach 2016      ger 9783785582008
+#> 7                      Jumbo, Hamburg 2016      ger 9783833736476
+#> 8                  St. Benno, Leipzig 2016      ger 9783746247922
+#> 9              Calvendo, Unterhaching 2016      ger 9783664852062
+#> 10             Calvendo, Unterhaching 2016      ger 9783664852055
+#>                                                                                                    price
+#> 1                                              : EUR 10.30 (AT), sfr 14.90 (freier Preis), EUR 9.95 (DE)
+#> 2                             : EUR 15.40 (AT), sfr 19.90 (freier Preis), EUR 14.90 (DE), EUR 14.90 (LU)
+#> 3                                                                                                   <NA>
+#> 4                                                                Gewebe : EUR 22.60 (AT), EUR 21.90 (DE)
+#> 5                                                            Festeinband : EUR 10.10 (AT), EUR 9.80 (DE)
+#> 6                                                                Gebunden : EUR 8.20 (AT), EUR 7.95 (DE)
+#> 7  in Behältnis : EUR 10.99 (AT) (freier Preis), sfr 14.50 (freier Preis), EUR 10.99 (DE) (freier Preis)
+#> 8                                                 Festeinband : circa EUR 8.95 (AT), circa EUR 8.95 (DE)
+#> 9                                         : EUR 18.90 (DE) (freier Preis), EUR 19.10 (AT) (freier Preis)
+#> 10                                        : EUR 29.90 (DE) (freier Preis), EUR 30.20 (AT) (freier Preis)
+#>            pages                 format         edition      keyword
+#> 1            160        18 cm x 12.6 cm            <NA>         <NA>
+#> 2            512        19.1 cm x 12 cm            <NA>         <NA>
+#> 3           <NA>                   63 g      1. Auflage         <NA>
+#> 4            278           22 cm, 650 g      1. Auflage Klimatologie
+#> 5             54 14.8 cm x 21 cm, 140 g 1., Erstausgabe         <NA>
+#> 6             48        24.5 cm x 18 cm            <NA>         <NA>
+#> 7  CDs (50 Min.)                   <NA>            <NA>         <NA>
+#> 8             80      19.5 cm x 12.5 cm    neue Ausgabe         <NA>
+#> 9             14 14.8 cm x 21 cm, 130 g 2. Auflage 2016         <NA>
+#> 10            14 29.7 cm x 42 cm, 463 g 2. Auflage 2016         <NA>
+#>                               toc
+#> 1                            <NA>
+#> 2                            <NA>
+#> 3                            <NA>
+#> 4  http://d-nb.info/1088777961/04
+#> 5                            <NA>
+#> 6                            <NA>
+#> 7                            <NA>
+#> 8                            <NA>
+#> 9                            <NA>
+#> 10                           <NA>
 #>                                                                                                description
-#> 1                         https://www.edition-rugerup.de/?product=alice-der-klimawandel-und-die-katze-zeta
-#> 2  http://deposit.d-nb.de/cgi-bin/dokserv?id=233cdda0eb904a09afd5ac8ac1825fdf&prov=M&dok_var=1&dok_ext=htm
-#> 3  http://deposit.d-nb.de/cgi-bin/dokserv?id=98d487ce0c0441b28457bb7c73bcba6b&prov=M&dok_var=1&dok_ext=htm
-#> 4  http://deposit.d-nb.de/cgi-bin/dokserv?id=f8d49875c2fd4966a5d3e09bc3d6a2a6&prov=M&dok_var=1&dok_ext=htm
+#> 1  http://deposit.d-nb.de/cgi-bin/dokserv?id=9671f2dd54f743d6af6d9d459de7ace6&prov=M&dok_var=1&dok_ext=htm
+#> 2  http://deposit.d-nb.de/cgi-bin/dokserv?id=c7061a6a54f24b4cae3a8d4b05e54651&prov=M&dok_var=2&dok_ext=htm
+#> 3  http://deposit.d-nb.de/cgi-bin/dokserv?id=bf2b770b8abf40809f71ebf97a5486a7&prov=M&dok_var=1&dok_ext=htm
+#> 4                         https://www.edition-rugerup.de/?product=alice-der-klimawandel-und-die-katze-zeta
 #> 5                                                                                                     <NA>
-#> 6                                                                                                     <NA>
+#> 6  http://deposit.d-nb.de/cgi-bin/dokserv?id=233cdda0eb904a09afd5ac8ac1825fdf&prov=M&dok_var=1&dok_ext=htm
 #> 7                                                                                                     <NA>
-#> 8  http://deposit.d-nb.de/cgi-bin/dokserv?id=399fda5149b74a79a65d599f48e3073f&prov=M&dok_var=1&dok_ext=htm
-#> 9                                                                                                     <NA>
-#> 10                                                                                                    <NA>
+#> 8                                                                                                     <NA>
+#> 9  http://deposit.d-nb.de/cgi-bin/dokserv?id=a2808e392970437bbb0349dbc78c57be&prov=M&dok_var=1&dok_ext=htm
+#> 10 http://deposit.d-nb.de/cgi-bin/dokserv?id=7c6aa018d3834d3aa7e1a055a40e63d9&prov=M&dok_var=1&dok_ext=htm
 #>                                                              cover
-#> 1  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-942955-52-2
-#> 2  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-7855-8200-8
-#> 3  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-8025-9897-5
-#> 4  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-13-219451-9
-#> 5                                                             <NA>
-#> 6                                                             <NA>
-#> 7                                                             <NA>
-#> 8  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-7787-8262-0
-#> 9  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-7725-2791-3
-#> 10 https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-95855-427-6
+#> 1  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-551-74290-2
+#> 2  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-423-14549-7
+#> 3                                                             <NA>
+#> 4  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-942955-52-2
+#> 5  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-940047-56-4
+#> 6  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-7855-8200-8
+#> 7  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-8337-3647-6
+#> 8  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-7462-4792-2
+#> 9  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-664-85206-2
+#> 10 https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-664-85205-5
 ```
 
 The following data is stored in the `data.frame` (if available):
@@ -334,7 +329,7 @@ The total number of records found by the request is stored in the attribute "num
 
 ```r
 attr(cats, "number_of_records")
-#> [1] 5547
+#> [1] 5618
 ```
 
 and the query itself can be viewed by calling the "query"-attribute:
