@@ -46,12 +46,15 @@ publisher \tab ] \tab [deleted] \cr
 edition \tab Aufl. \tab Auflage \cr
 edition \tab aufl. \tab auflage \cr
 edition \tab Orig. \tab Original \cr
+edition \tab Ed. \tab Edition \cr
+edition \tab ed. \tab edition \cr
 edition \tab Ausg. \tab Ausgabe \cr
 edition \tab ausg. \tab ausgabe \cr
-edition \tab Erw. \tab Erweiterte \cr
-edition \tab erw. \tab erweiterte \cr
+edition \tab Nachdr. \tab Nachdruck \cr
+edition \tab Bibliogr. \tab Bibliografie \cr
 edition \tab [ \tab [deleted] \cr
 edition \tab ] \tab [deleted] \cr
+edition \tab [x]., \tab [x]. \cr 
 price \tab kart. \tab Kartoniert \cr
 price \tab Gb. \tab Gebunden \cr
 price \tab Spiralb. \tab Spiralbindung \cr
