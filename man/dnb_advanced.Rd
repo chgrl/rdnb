@@ -26,6 +26,7 @@ A \code{data.frame} of results with metadata.
 }
 \details{
 \emph{Cleaning of results}
+
 To harmonise the results, some clutter is deleted and abbreviations frequently used in the dnb catalogue are replaced by full words. Here is a list of all replacements:
 \tabular{lll}{
 Variable \tab Searched \tab Replaced by \cr

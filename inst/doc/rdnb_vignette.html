@@ -9,7 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="date" content="2016-06-07" />
+<meta name="date" content="2017-02-07" />
 
 <title>Introduction to rdnb</title>
 
@@ -62,7 +62,7 @@ img {
 
 <div id="header">
 <h1 class="title">Introduction to rdnb</h1>
-<h4 class="date"><em>2016-06-07</em></h4>
+<h4 class="date"><em>2017-02-07</em></h4>
 </div>
 
 
@@ -187,117 +187,43 @@ all.results &lt;- dnb_search(title=&quot;katze&quot;, year=2016, limit=&quot;all
 <div id="results" class="section level5">
 <h5>Results</h5>
 <p>Per default no results are printed. Set <code>print</code> to <code>TRUE</code> to print the <code>data.frame</code> with the results.</p>
-<pre class="r"><code>cats &lt;- dnb_search(title=&quot;katze&quot;, print=TRUE)
-#&gt;            id                        link
-#&gt; 1  1097774554 http://d-nb.info/1097774554
-#&gt; 2  1097226905 http://d-nb.info/1097226905
-#&gt; 3  1100708146 http://d-nb.info/1100708146
-#&gt; 4  1088777961 http://d-nb.info/1088777961
-#&gt; 5  1098154215 http://d-nb.info/1098154215
-#&gt; 6  1079083170 http://d-nb.info/1079083170
-#&gt; 7  1096497980 http://d-nb.info/1096497980
-#&gt; 8  1100180605 http://d-nb.info/1100180605
-#&gt; 9  1101958081 http://d-nb.info/1101958081
-#&gt; 10 1101959010 http://d-nb.info/1101959010
-#&gt;                                         author
-#&gt; 1                         Kanata, Konami (aut)
-#&gt; 2                           Lehr, Thomas (aut)
-#&gt; 3                      Tinteren, Michael (edt)
-#&gt; 4                        Boysen, Margret (aut)
-#&gt; 5                        Hofmann, Holger (aut)
-#&gt; 6  von Vogel, Maja (aut); Bux, Alexander (ill)
-#&gt; 7                        Schöne, Gerhard (aut)
-#&gt; 8                         Krön, Gabriele (aut)
-#&gt; 9                            Klatt, Arno (aut)
-#&gt; 10                           Klatt, Arno (aut)
-#&gt;                                                                       title
-#&gt; 1                                                 Kleine Katze Chi, Band 11
-#&gt; 2                                                            Nabokovs Katze
-#&gt; 3                                                           2 treue Freunde
-#&gt; 4                                 Alice, der Klimawandel und die Katze Zeta
-#&gt; 5                                                           Bär liebt Katze
-#&gt; 6                        Bildermaus – Der kleine Fuchs und die freche Katze
-#&gt; 7                                                       Bis die Katze bellt
-#&gt; 8                                   Clarabella. Die Katze auf der Orgelbank
-#&gt; 9  Der Luchs - Der Jäger auf leisen Pfoten (Tischkalender 2017 DIN A5 quer)
-#&gt; 10  Der Luchs - Der Jäger auf leisen Pfoten (Wandkalender 2017 DIN A3 quer)
-#&gt;                                                      subtitle
-#&gt; 1                                                        &lt;NA&gt;
-#&gt; 2                                                       Roman
-#&gt; 3                                                Katze &amp; Hund
-#&gt; 4                                                        &lt;NA&gt;
-#&gt; 5                                                        &lt;NA&gt;
-#&gt; 6                                                        &lt;NA&gt;
-#&gt; 7         Verrückte Kinderlieder aus allen Ecken unserer Welt
-#&gt; 8                                             Kleine Episoden
-#&gt; 9  Die Katze mit den Pinselohren. (Monatskalender, 14 Seiten)
-#&gt; 10 Die Katze mit den Pinselohren. (Monatskalender, 14 Seiten)
-#&gt;                             publisher year language          isbn
-#&gt; 1                    Carlsen, Hamburg 2017      ger 9783551742902
-#&gt; 2    dtv Verlagsgesellschaft, München 2017      ger 9783423145497
-#&gt; 3          Coppenrath, Münster, Westf 2016      ger 4050003941981
-#&gt; 4             Edition Rugerup, Berlin 2016      ger 9783942955522
-#&gt; 5  Gringo Comics, Esslingen am Neckar 2016      ger 9783940047564
-#&gt; 6                     Loewe, Bindlach 2016      ger 9783785582008
-#&gt; 7                      Jumbo, Hamburg 2016      ger 9783833736476
-#&gt; 8                  St. Benno, Leipzig 2016      ger 9783746247922
-#&gt; 9              Calvendo, Unterhaching 2016      ger 9783664852062
-#&gt; 10             Calvendo, Unterhaching 2016      ger 9783664852055
-#&gt;                                                                                                    price
-#&gt; 1                                              : EUR 10.30 (AT), sfr 14.90 (freier Preis), EUR 9.95 (DE)
-#&gt; 2                             : EUR 15.40 (AT), sfr 19.90 (freier Preis), EUR 14.90 (DE), EUR 14.90 (LU)
-#&gt; 3                                                                                                   &lt;NA&gt;
-#&gt; 4                                                                Gewebe : EUR 22.60 (AT), EUR 21.90 (DE)
-#&gt; 5                                                            Festeinband : EUR 10.10 (AT), EUR 9.80 (DE)
-#&gt; 6                                                                Gebunden : EUR 8.20 (AT), EUR 7.95 (DE)
-#&gt; 7  in Behältnis : EUR 10.99 (AT) (freier Preis), sfr 14.50 (freier Preis), EUR 10.99 (DE) (freier Preis)
-#&gt; 8                                                 Festeinband : circa EUR 8.95 (AT), circa EUR 8.95 (DE)
-#&gt; 9                                         : EUR 18.90 (DE) (freier Preis), EUR 19.10 (AT) (freier Preis)
-#&gt; 10                                        : EUR 29.90 (DE) (freier Preis), EUR 30.20 (AT) (freier Preis)
-#&gt;            pages                 format         edition      keyword
-#&gt; 1            160        18 cm x 12.6 cm            &lt;NA&gt;         &lt;NA&gt;
-#&gt; 2            512        19.1 cm x 12 cm            &lt;NA&gt;         &lt;NA&gt;
-#&gt; 3           &lt;NA&gt;                   63 g      1. Auflage         &lt;NA&gt;
-#&gt; 4            278           22 cm, 650 g      1. Auflage Klimatologie
-#&gt; 5             54 14.8 cm x 21 cm, 140 g 1., Erstausgabe         &lt;NA&gt;
-#&gt; 6             48        24.5 cm x 18 cm            &lt;NA&gt;         &lt;NA&gt;
-#&gt; 7  CDs (50 Min.)                   &lt;NA&gt;            &lt;NA&gt;         &lt;NA&gt;
-#&gt; 8             80      19.5 cm x 12.5 cm    neue Ausgabe         &lt;NA&gt;
-#&gt; 9             14 14.8 cm x 21 cm, 130 g 2. Auflage 2016         &lt;NA&gt;
-#&gt; 10            14 29.7 cm x 42 cm, 463 g 2. Auflage 2016         &lt;NA&gt;
-#&gt;                               toc
-#&gt; 1                            &lt;NA&gt;
-#&gt; 2                            &lt;NA&gt;
-#&gt; 3                            &lt;NA&gt;
-#&gt; 4  http://d-nb.info/1088777961/04
-#&gt; 5                            &lt;NA&gt;
-#&gt; 6                            &lt;NA&gt;
-#&gt; 7                            &lt;NA&gt;
-#&gt; 8                            &lt;NA&gt;
-#&gt; 9                            &lt;NA&gt;
-#&gt; 10                           &lt;NA&gt;
-#&gt;                                                                                                description
-#&gt; 1  http://deposit.d-nb.de/cgi-bin/dokserv?id=9671f2dd54f743d6af6d9d459de7ace6&amp;prov=M&amp;dok_var=1&amp;dok_ext=htm
-#&gt; 2  http://deposit.d-nb.de/cgi-bin/dokserv?id=c7061a6a54f24b4cae3a8d4b05e54651&amp;prov=M&amp;dok_var=2&amp;dok_ext=htm
-#&gt; 3  http://deposit.d-nb.de/cgi-bin/dokserv?id=bf2b770b8abf40809f71ebf97a5486a7&amp;prov=M&amp;dok_var=1&amp;dok_ext=htm
-#&gt; 4                         https://www.edition-rugerup.de/?product=alice-der-klimawandel-und-die-katze-zeta
-#&gt; 5                                                                                                     &lt;NA&gt;
-#&gt; 6  http://deposit.d-nb.de/cgi-bin/dokserv?id=233cdda0eb904a09afd5ac8ac1825fdf&amp;prov=M&amp;dok_var=1&amp;dok_ext=htm
-#&gt; 7                                                                                                     &lt;NA&gt;
-#&gt; 8                                                                                                     &lt;NA&gt;
-#&gt; 9  http://deposit.d-nb.de/cgi-bin/dokserv?id=a2808e392970437bbb0349dbc78c57be&amp;prov=M&amp;dok_var=1&amp;dok_ext=htm
-#&gt; 10 http://deposit.d-nb.de/cgi-bin/dokserv?id=7c6aa018d3834d3aa7e1a055a40e63d9&amp;prov=M&amp;dok_var=1&amp;dok_ext=htm
-#&gt;                                                              cover
-#&gt; 1  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-551-74290-2
-#&gt; 2  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-423-14549-7
-#&gt; 3                                                             &lt;NA&gt;
-#&gt; 4  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-942955-52-2
-#&gt; 5  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-940047-56-4
-#&gt; 6  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-7855-8200-8
-#&gt; 7  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-8337-3647-6
-#&gt; 8  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-7462-4792-2
-#&gt; 9  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-664-85206-2
-#&gt; 10 https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-664-85205-5</code></pre>
+<pre class="r"><code>cats &lt;- dnb_search(title=&quot;katze&quot;, limit=3, print=TRUE)
+#&gt;           id                        link
+#&gt; 1 1116362198 http://d-nb.info/1116362198
+#&gt; 2 1120516579 http://d-nb.info/1120516579
+#&gt; 3 1120327474 http://d-nb.info/1120327474
+#&gt;                                               author
+#&gt; 1 Teckentrup, Britta (ill); Teckentrup, Britta (aut)
+#&gt; 2                       Frey, Alexander Moritz (aut)
+#&gt; 3                                               &lt;NA&gt;
+#&gt;                                                   title
+#&gt; 1                      Alles Natur - Meine kleine Katze
+#&gt; 2                                 Birl, die kühne Katze
+#&gt; 3 Bookmonster Katze - Lesekissen für Bücher und Tablets
+#&gt;               subtitle                publisher year language
+#&gt; 1                 &lt;NA&gt;     Ars Edition, München 2017      ger
+#&gt; 2          Ein Märchen Elsinor Verlag, Coesfeld 2017      ger
+#&gt; 3 Stabil und flauschig    Bookchair, Regensburg 2017      ger
+#&gt;            isbn
+#&gt; 1 9783845815886
+#&gt; 2 9783942788373
+#&gt; 3 5060213015531
+#&gt;                                                            price pages
+#&gt; 1 Pappe : EUR 7.99 (DE), EUR 8.30 (AT), CHF 11.90 (freier Preis)    16
+#&gt; 2          Broschur : circa EUR 12.80 (DE), circa EUR 13.20 (AT)    88
+#&gt; 3                                                           &lt;NA&gt;  &lt;NA&gt;
+#&gt;                 format                  edition keyword  toc
+#&gt; 1    17.3 cm x 17.3 cm                     &lt;NA&gt;    &lt;NA&gt; &lt;NA&gt;
+#&gt; 2        19 cm x 12 cm 1. Auflage, neue Ausgabe    &lt;NA&gt; &lt;NA&gt;
+#&gt; 3 25 cm x 29 cm, 330 g                     &lt;NA&gt;    &lt;NA&gt; &lt;NA&gt;
+#&gt;                                                                                               description
+#&gt; 1 http://deposit.d-nb.de/cgi-bin/dokserv?id=992efedfe14a4b06ad7dc4f344cd9e87&amp;prov=M&amp;dok_var=1&amp;dok_ext=htm
+#&gt; 2                                                                                                    &lt;NA&gt;
+#&gt; 3 http://deposit.d-nb.de/cgi-bin/dokserv?id=f1e0b9c619e947c798f14d94e4f06b58&amp;prov=M&amp;dok_var=1&amp;dok_ext=htm
+#&gt;                                                             cover
+#&gt; 1 https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-8458-1588-6
+#&gt; 2 https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-942788-37-3
+#&gt; 3                                                            &lt;NA&gt;</code></pre>
 <p>The following data is stored in the <code>data.frame</code> (if available):</p>
 <table>
 <thead>
@@ -377,13 +303,6 @@ all.results &lt;- dnb_search(title=&quot;katze&quot;, year=2016, limit=&quot;all
 </tr>
 </tbody>
 </table>
-<p>The total number of records found by the request is stored in the attribute “number_of_records”:</p>
-<pre class="r"><code>attr(cats, &quot;number_of_records&quot;)
-#&gt; [1] 5618</code></pre>
-<p>and the query itself can be viewed by calling the “query”-attribute:</p>
-<pre class="r"><code>attr(cats, &quot;query&quot;)
-#&gt; [1] &quot;(tit=katze)&quot;</code></pre>
-<p>You can use this query directly with the <code>dnb_advanced</code> function.</p>
 </div>
 </div>
 <div id="advanced-search---dnb_advanced" class="section level4">
@@ -391,6 +310,25 @@ all.results &lt;- dnb_search(title=&quot;katze&quot;, year=2016, limit=&quot;all
 <p><code>dnb_advanced</code> allows for complex requests using the Contextual Query Language (CQL). See the <a href="http://www.dnb.de/EN/Header/Hilfe/kataloghilfeExpertensuche.html">DNB advanced search help pages</a> for available indices and a list of examples.</p>
 <p>The following advanced search returns a list of german or english children’s books titled with ‘cat’, excluding titles containing ‘dog’, since the year 2001:</p>
 <pre class="r"><code>cats &lt;- dnb_advanced(&quot;( (tit=katze OR tit=kater NOT tit=hund) OR (tit=cat NOT tit=dog) ) AND jhr&gt;2000 AND mat=books AND (spr=ger OR spr=eng) AND sgt=K&quot;, limit=&quot;all&quot;)</code></pre>
+</div>
+</div>
+<div id="utils" class="section level3">
+<h3>Utils</h3>
+<div id="number-of-records" class="section level4">
+<h4>Number of records</h4>
+<p>Use <code>n_rec</code> to get the total number of records found by a request:</p>
+<pre class="r"><code>n_rec(cats)
+#&gt; [1] 5885</code></pre>
+</div>
+<div id="print-query" class="section level4">
+<h4>Print query</h4>
+<p>To print the query used for a DNB-search, call <code>print_query</code>:</p>
+<pre class="r"><code>print_query(cats)
+#&gt; [1] &quot;(tit=katze)&quot;</code></pre>
+<p>You can use this query (or an edited version) directly with the <code>dnb_advanced</code> function:</p>
+<pre class="r"><code>cat.q &lt;- print_query(cats)
+cat.q &lt;- gsub(&quot;jhr&gt;2000&quot;, &quot;jhr&gt;=2015&quot;, cat.q) # change year
+dnb_advanced(cat.q)</code></pre>
 </div>
 </div>
 

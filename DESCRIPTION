@@ -19,6 +19,7 @@ Description: A wrapper for the Deutsche Nationalbibliothek (German National
 URL: https://github.com/chgrl/rdnb
 BugReports: https://github.com/chgrl/rdnb/issues
 License: MIT + file LICENSE
+VignetteBuilder: knitr
 Imports:
     brew,
     grDevices,
