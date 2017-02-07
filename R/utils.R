@@ -227,3 +227,22 @@ n_rec <- function(dnb_obj) {
   }
 }
 
+
+#' @title Print search query
+#' @description \code{print_query} prints out the query used for a DNB-search request.
+#' @param dnb_obj the DNB-serch object returned by \code{\link{dnb_search}} or \code{\link{dnb_advanced}}.
+#' @return Query string.
+#' @export
+#' @examples
+#' \dontrun{
+#' dnb.srch <- dnb_search(title="katze")
+#' print_query(dnb.srch)
+#' }
+print_query <- function(dnb_obj) {
+  # check lor and return query
+  if(is.null(attr(dnb_obj, "query"))) {
+    return(NULL)
+  } else {
+    return(attr(dnb_obj, "query"))
+  }
+}
