@@ -206,3 +206,24 @@ dnb_to_df <- function(lst, clean) {
 		
 	return(df)
 }
+
+
+#' @title Number of records
+#' @description \code{n_rec} returns the number of items in a list of records returned by a DNB-search. 
+#' @param dnb_obj the DNB-search object returned \code{\link{dnb_search}} or \code{\link{dnb_advanced}}.
+#' @return Number of records found.
+#' @export
+#' @examples
+#' \dontrun{
+#' dnb.srch <- dnb_search(title="katze")
+#' n_rec(dnb.srch)
+#' }
+n_rec <- function(dnb_obj) {
+  # check lor and return nrec
+  if(is.null(attr(dnb_obj, "number_of_records"))) {
+    return(NULL)
+  } else {
+    return(attr(dnb_obj, "number_of_records"))
+  }
+}
+
