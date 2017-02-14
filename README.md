@@ -101,13 +101,15 @@ set.of.years <- dnb_search(title="katze", year=c(2010:2013, 2015))
 
 ##### Search for publisher
 
-Publisher name and/or location may be limited by the `publisher` parameter. A vector of string values is combined by "OR".
+Publisher name and/or location may be limited by the `publisher` parameter. Logical operators can be set as explained above.
 
 
 ```r
 single.publisher <- dnb_search(title="katze", publisher="kiepenheuer")
-single.publisher.location <- dnb_search(title="katze", publisher="*verlag leipzig")
-set.of.publishers <- dnb_search(title="katze", publisher=c("kiepenheuer", "piper"))
+single.publisher.location <- dnb_search(title="katze", publisher="*verlag leipzig*")
+pub.or.pub <- dnb_search(title="katze", publisher=c("kiepenheuer", "piper"))
+pub.and.pub <- dnb_search(title="katze", publisher=c("*kinder*", "+*berlin*"))
+pub.not.pub <- dnb_search(title="katze", publisher=c("pi*", "-piper"))
 ```
 
 ##### Search for keyword
@@ -187,128 +189,39 @@ Per default no results are printed. Set `print` to `TRUE` to print the `data.fra
 
 
 ```r
-cats <- dnb_search(title="katze", print=TRUE)
-#>            id                        link
-#> 1  1088777961 http://d-nb.info/1088777961
-#> 2  1079083170 http://d-nb.info/1079083170
-#> 3  1078237050 http://d-nb.info/1078237050
-#> 4  1082000671 http://d-nb.info/1082000671
-#> 5  108078571X http://d-nb.info/108078571X
-#> 6  1080780793 http://d-nb.info/1080780793
-#> 7  1085681068 http://d-nb.info/1085681068
-#> 8  107915972X http://d-nb.info/107915972X
-#> 9  1079347178 http://d-nb.info/1079347178
-#> 10 1084797631 http://d-nb.info/1084797631
-#>                                                                     author
-#> 1                                                    Boysen, Margret (aut)
-#> 2                              von Vogel, Maja (aut); Bux, Alexander (ill)
-#> 3                                                    Schacht, Andrea (aut)
-#> 4                                                   Peters, Stefanie (aut)
-#> 5                                                                     <NA>
-#> 6                                                                     <NA>
-#> 7  Francis, H.G. (aut); Pasetti, Peter (nrt); Francis, H.G.; Francis, H.G.
-#> 8                     Michie, David (aut); Lang, Kurt (trl); Michie, David
-#> 9                                   Fox, Diane (aut); Fox, Christyan (aut)
-#> 10                                                  Poe, Edgar Allan (aut)
-#>                                                                                                      title
-#> 1                                                                Alice, der Klimawandel und die Katze Zeta
-#> 2                                                       Bildermaus – Der kleine Fuchs und die freche Katze
-#> 3                                                                \u0098Der\u009c Tag, an dem die Katze kam
-#> 4                                                                                 Dermatologie-Atlas Katze
-#> 5                                                                                     Dicke Katze 2017 A&I
-#> 6                                                                                     Dicke Katze 2017 A&I
-#> 7                                                            \u0098Die\u009c drei ??? und der Karpatenhund
-#> 8                                      \u0098Die\u009c Katze des Dalai Lama und der Zauber des Augenblicks
-#> 9  \u0098Die\u009c Katze, der Hund, Rotkäppchen, die explodierenden Eier, der Wolf und Omas Kleiderschrank
-#> 10                                                                          \u0098Die\u009c schwarze Katze
-#>                                           subtitle
-#> 1                                             <NA>
-#> 2                                             <NA>
-#> 3                    Jennys & Ghizmos zweiter Fall
-#> 4  Krankheitsbilder und typische Verteilungsmuster
-#> 5                                             <NA>
-#> 6                                             <NA>
-#> 7                                             <NA>
-#> 8                                            Roman
-#> 9                                             <NA>
-#> 10                                            <NA>
-#>                                              publisher   year language
-#> 1                              Edition Rugerup, Berlin   2016      ger
-#> 2                                      Loewe, Bindlach   2016      ger
-#> 3                                     Egmont LYX, Köln   2016      ger
-#> 4                                      Enke, Stuttgart   2016      ger
-#> 5  teNeues Calendars & Stationery, Kempen, Niederrhein   2016      ger
-#> 6  teNeues Calendars & Stationery, Kempen, Niederrhein   2016      ger
-#> 7       Sony Music Entertainment Germany GmbH, München [2016]      ger
-#> 8                                       Lotos, München   2016      ger
-#> 9                      Freies Geistesleben , Stuttgart   2016      ger
-#> 10                     fabula Verlag Hamburg , Hamburg   2016      ger
-#>             isbn
-#> 1  9783942955522
-#> 2  9783785582008
-#> 3  9783802598975
-#> 4  9783132194519
-#> 5  4002725785084
-#> 6  4002725784995
-#> 7           <NA>
-#> 8  9783778782620
-#> 9  9783772527913
-#> 10 9783958554276
-#>                                                                          price
-#> 1                                      Gewebe : EUR 22.60 (AT), EUR 21.90 (DE)
-#> 2                                           Gb. : EUR 8.20 (AT), EUR 7.95 (DE)
-#> 3                Kart. : EUR 10.30 (AT), sfr 13.50 (freier Pr.), EUR 9.99 (DE)
-#> 4  Broschiert (FH) : EUR 92.60 (AT), sfr 103.00 (freier Preis), EUR 89.99 (DE)
-#> 5                                                                         <NA>
-#> 6                                                                         <NA>
-#> 7                                                                         <NA>
-#> 8                     : EUR 17.50 (AT), sfr 22.90 (freier Pr.), EUR 16.99 (DE)
-#> 9                                 Gb. : ca. EUR 16.40 (AT), ca. EUR 15.90 (DE)
-#> 10         Broschur : EUR 12.90 (AT), sfr 16.00 (freier Preis), EUR 12.90 (DE)
-#>         pages                 format                         edition
-#> 1  278 Seiten 21.5 cm x 17 cm, 650 g                      1. Auflage
-#> 2       48 S.        24.5 cm x 18 cm                            <NA>
-#> 3      320 S.        18 cm x 12.4 cm                            <NA>
-#> 4  304 Seiten          24 cm x 17 cm                      1. Auflage
-#> 5        <NA>          30 cm x 30 cm                            <NA>
-#> 6        <NA>        45 cm x 19.5 cm                            <NA>
-#> 7       2 CDs                  12 cm        Limitierte Sonderedition
-#> 8      256 S.        20 cm x 12.5 cm                            <NA>
-#> 9       32 S.                   <NA>                        1. Aufl.
-#> 10       <NA>          19 cm x 12 cm 1. Auflage, bearbeitete Ausgabe
-#>    keyword toc
-#> 1       NA  NA
-#> 2       NA  NA
-#> 3       NA  NA
-#> 4       NA  NA
-#> 5       NA  NA
-#> 6       NA  NA
-#> 7       NA  NA
-#> 8       NA  NA
-#> 9       NA  NA
-#> 10      NA  NA
-#>                                                                                                description
-#> 1                         https://www.edition-rugerup.de/?product=alice-der-klimawandel-und-die-katze-zeta
-#> 2  http://deposit.d-nb.de/cgi-bin/dokserv?id=233cdda0eb904a09afd5ac8ac1825fdf&prov=M&dok_var=1&dok_ext=htm
-#> 3  http://deposit.d-nb.de/cgi-bin/dokserv?id=98d487ce0c0441b28457bb7c73bcba6b&prov=M&dok_var=1&dok_ext=htm
-#> 4  http://deposit.d-nb.de/cgi-bin/dokserv?id=f8d49875c2fd4966a5d3e09bc3d6a2a6&prov=M&dok_var=1&dok_ext=htm
-#> 5                                                                                                     <NA>
-#> 6                                                                                                     <NA>
-#> 7                                                                                                     <NA>
-#> 8  http://deposit.d-nb.de/cgi-bin/dokserv?id=399fda5149b74a79a65d599f48e3073f&prov=M&dok_var=1&dok_ext=htm
-#> 9                                                                                                     <NA>
-#> 10                                                                                                    <NA>
-#>                                                              cover
-#> 1  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-942955-52-2
-#> 2  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-7855-8200-8
-#> 3  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-8025-9897-5
-#> 4  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-13-219451-9
-#> 5                                                             <NA>
-#> 6                                                             <NA>
-#> 7                                                             <NA>
-#> 8  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-7787-8262-0
-#> 9  https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-7725-2791-3
-#> 10 https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-95855-427-6
+cats <- dnb_search(title="katze", limit=3, print=TRUE)
+#>           id                        link
+#> 1 1116362198 http://d-nb.info/1116362198
+#> 2 1120516579 http://d-nb.info/1120516579
+#> 3 1125403497 http://d-nb.info/1125403497
+#>                                               author
+#> 1 Teckentrup, Britta (ill); Teckentrup, Britta (aut)
+#> 2                       Frey, Alexander Moritz (aut)
+#> 3                            Krokowski, Carola (aut)
+#>                              title             subtitle
+#> 1 Alles Natur - Meine kleine Katze                 <NA>
+#> 2            Birl, die kühne Katze          Ein Märchen
+#> 3   Blutwerte - Pferd, Hund, Katze Blutwerte verstehen!
+#>                        publisher year language          isbn
+#> 1           Ars Edition, München 2017      ger 9783845815886
+#> 2       Elsinor Verlag, Coesfeld 2017      ger 9783942788373
+#> 3 Igelsburg Verlag, Habichtswald 2017      ger 9783941933200
+#>                                                              price pages
+#> 1   Pappe : EUR 7.99 (DE), EUR 8.30 (AT), CHF 11.90 (freier Preis)    16
+#> 2            Broschur : circa EUR 12.80 (DE), circa EUR 13.20 (AT)    88
+#> 3 : EUR 29.95 (DE), EUR 29.95 (DE), EUR 30.80 (AT), EUR 30.30 (AT)     2
+#>              format                  edition keyword  toc
+#> 1 17.3 cm x 17.3 cm                     <NA>    <NA> <NA>
+#> 2     19 cm x 12 cm 1. Auflage, neue Ausgabe    <NA> <NA>
+#> 3              <NA>               1. Auflage    <NA> <NA>
+#>                                                                                               description
+#> 1 http://deposit.d-nb.de/cgi-bin/dokserv?id=992efedfe14a4b06ad7dc4f344cd9e87&prov=M&dok_var=1&dok_ext=htm
+#> 2                                                                                                    <NA>
+#> 3                                                                                                    <NA>
+#>                                                             cover
+#> 1 https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-8458-1588-6
+#> 2 https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-942788-37-3
+#> 3 https://portal.dnb.de/opac/mvb/cover.htm?isbn=978-3-941933-20-0
 ```
 
 The following data is stored in the `data.frame` (if available):
@@ -333,26 +246,6 @@ The following data is stored in the `data.frame` (if available):
 | description | link to description |
 | cover | link to cover image |
 
-
-The total number of records found by the request is stored in the attribute "number_of_records":
-
-
-```r
-attr(cats, "number_of_records")
-#> [1] 5547
-```
-
-and the query itself can be viewed by calling the "query"-attribute:
-
-
-```r
-attr(cats, "query")
-#> [1] "(tit=katze)"
-```
-
-You can use this query directly with the `dnb_advanced` function. 
-
-
 #### Advanced search - `dnb_advanced`
 
 `dnb_advanced` allows for complex requests using the Contextual Query Language (CQL). See the [DNB advanced search help pages](http://www.dnb.de/EN/Header/Hilfe/kataloghilfeExpertensuche.html) for available indices and a list of examples.
@@ -362,4 +255,36 @@ The following advanced search returns a list of german or english children's boo
 
 ```r
 cats <- dnb_advanced("( (tit=katze OR tit=kater NOT tit=hund) OR (tit=cat NOT tit=dog) ) AND jhr>2000 AND mat=books AND (spr=ger OR spr=eng) AND sgt=K", limit="all")
+```
+
+
+### Utils
+
+#### Number of records
+
+Use `n_rec` to get the total number of records found by a request:
+
+
+```r
+n_rec(cats)
+#> [1] 5895
+```
+
+#### Print query
+
+To print the query used for a DNB-search, call `print_query`:
+
+
+```r
+print_query(cats)
+#> [1] "(tit=katze)"
+```
+
+You can use this query (or an edited version) directly with the `dnb_advanced` function:
+
+
+```r
+cat.q <- print_query(cats)
+cat.q <- gsub("jhr>2000", "jhr>=2015", cat.q) # change year
+dnb_advanced(cat.q)
 ```

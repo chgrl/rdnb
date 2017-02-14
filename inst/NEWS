@@ -1,3 +1,21 @@
+rdnb 0.1-1 [2017-02-14]
+-----------------------
+
+* data cleaning option added
+
+* progress bar added (for limit="all" only)
+
+* limitation for number of results (1-100) removed
+
+* NOT-operator support added to publisher search
+
+* new function "n_rec" added - get number of records
+
+* new function "print_query" added - print search query
+
+* other small fixes and improvements
+
+
 rdnb 0.1-0 [2016-03-30]
 -----------------------
 

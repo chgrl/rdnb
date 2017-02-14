@@ -1,7 +1,8 @@
-# Introduction to rdnb
-`r Sys.Date()`  
-
-
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Introduction to rdnb}
+%\VignetteEncoding{UTF-8}
+-->
 
 
 

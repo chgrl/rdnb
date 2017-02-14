@@ -1,16 +1,16 @@
 Package: rdnb
 Type: Package
-Title: R Interface to the Deutsche Nationalbibliothek (German National Library)
-    API
-Version: 0.1-0
-Date: 2016-03-30
+Title: R Interface to the 'Deutsche Nationalbibliothek (German National Library)
+    API'
+Version: 0.1-1
+Date: 2017-02-14
 Author: c(
     person("Christian", "Graul", email = "christian.graul@gmail.com",
     role = c("aut", "cre"))
     )
 Maintainer: Christian Graul <christian.graul@gmail.com>
-Description: A wrapper for the Deutsche Nationalbibliothek (German National
-    Library) API, available at <http://www.dnb.de>. The German National Library is
+Description: A wrapper for the 'Deutsche Nationalbibliothek (German National
+    Library) API', available at <http://www.dnb.de>. The German National Library is
     the German central archival library, collecting, archiving, bibliographically
     classifying all German and German-language publications, foreign
     publications about Germany, translations of German works, and the works of
