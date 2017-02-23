@@ -9,6 +9,10 @@ function(libname, pkgname) {
     packageStartupMessage(" ")
 }
 
+.onLoad <- 
+function(libname, pkgname) {
+  options(rdnb_show_url=FALSE)
+}
 
 #' @title View changes notes.
 #' @description \code{changes} brings up the NEWS file of the package. 
