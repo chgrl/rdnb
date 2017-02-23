@@ -71,7 +71,6 @@ img {
 <p><code>rdnb</code> is an R wrapper for the Deutsche Nationalbibliothek (German National Library) API, available at <a href="http://www.dnb.de" class="uri">http://www.dnb.de</a>. As the German central archival library, the German National Library is collecting, archiving, bibliographically classifying all German and German-language publications, foreign publications about Germany, translations of German works, and the works of German-speaking emigrants published abroad between 1933 and 1945.</p>
 <p>All bibliographic data of the German National Library are provided free of charge and can be freely re-used under “Creative Commons Zero” (<a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en">CC0 1.0</a>) terms. The metadata and online interfaces are provided with no guarantee of their being continuous, punctual, error-free or complete, or of their not infringing the rights of third parties (e.g. personal rights and copyright).</p>
 <p>A personal access token is required for usage and can be requested by sending an e-mail to the Interface Service (<a href="mailto:schnittstellen-service@dnb.de">schnittstellen-service@dnb.de</a>). The e-mail must include the required catalogue “Catalogue of German National Library (DNB) / Katalog der Deutschen Nationalbibliothek (DNB)” and the access option “via access token / über Zugangscode”.</p>
-<p>If you do not want to enter your token for each R session, put the following in your .Renviron or .Rprofile file: <code>DNB_TOKEN=PUTYOURTOKENHERE</code>.</p>
 <div id="source-and-more-details" class="section level4">
 <h4>Source and more details:</h4>
 <p><a href="http://www.dnb.de/EN/Wir/wir_node.html">About the DNB</a>; <a href="http://www.dnb.de/EN/Service/DigitaleDienste/SRU/sru_node.html">About the interface and access requirements</a>; <a href="http://dnb.dnb.de">The DNB web search</a></p>
@@ -91,11 +90,13 @@ devtools::install_github(&quot;chgrl/rdnb&quot;)</code></pre>
 <h3>Load the package</h3>
 <pre class="r"><code>library(rdnb)</code></pre>
 <pre><code>##  
-## This is rdnb 0.1-0
+## This is rdnb 0.1-1
 ##  
 ## Type changes(&quot;rdnb&quot;) to see changes/bug fixes, help(rdnb) for documentation
 ## or citation(&quot;rdnb&quot;) for how to cite rdnb.
 ## </code></pre>
+<p>Performing a search, you will be prompted for your personal access token. If you do not want to enter your token again for every R session, you may use the <code>save_token</code> function to save it in your .Renviron file.</p>
+<pre class="r"><code>save_token(&quot;YOUR_TOKEN_HERE&quot;)</code></pre>
 </div>
 <div id="search-the-dnb-catalogue" class="section level3">
 <h3>Search the DNB catalogue</h3>
@@ -106,7 +107,7 @@ devtools::install_github(&quot;chgrl/rdnb&quot;)</code></pre>
 <h5>Search for title</h5>
 <p>Use the <code>title</code> parameter to search in titles, including subtitle, short title, volume title, etc.</p>
 <pre class="r"><code>single.title &lt;- dnb_search(title=&quot;katze&quot;)</code></pre>
-<pre><code>## 5895 records found (request limited to 10 records)</code></pre>
+<pre><code>## 5898 records found (request limited to 10 records)</code></pre>
 <p>A vector of strings combines search terms. Strings in a vector are “OR”-combined by default. Logical operators can be changed by starting a string with <code>+</code> or <code>-</code>, thus the following code searches for titles containing one of “katze” or “kater”, “maus” but not “hund”.</p>
 <pre class="r"><code>multi.title &lt;- dnb_search(title=c(&quot;katze&quot;, &quot;kater&quot;, &quot;+maus&quot;, &quot;-hund&quot;))</code></pre>
 <pre><code>## 171 records found (request limited to 10 records)</code></pre>
@@ -115,17 +116,17 @@ devtools::install_github(&quot;chgrl/rdnb&quot;)</code></pre>
 <h5>Search for author</h5>
 <p>The <code>author</code> parameter offers a search for one or a set of authors. Logical operators can be set as explained above.</p>
 <pre class="r"><code>single.author.1 &lt;- dnb_search(author=&quot;kern&quot;)</code></pre>
-<pre><code>## 4941 records found (request limited to 10 records)</code></pre>
+<pre><code>## 4957 records found (request limited to 10 records)</code></pre>
 <pre class="r"><code>single.author.2 &lt;- dnb_search(author=&quot;kern, ingolf&quot;)</code></pre>
-<pre><code>## 9 records found (request limited to 10 records)</code></pre>
+<pre><code>## 10 records found (request limited to 10 records)</code></pre>
 <pre class="r"><code>single.author.3 &lt;- dnb_search(author=&quot;ingolf kern&quot;)</code></pre>
 <pre><code>## no records found</code></pre>
 <pre class="r"><code>author.or.author &lt;- dnb_search(author=c(&quot;kern&quot;, &quot;locke&quot;))</code></pre>
-<pre><code>## 5337 records found (request limited to 10 records)</code></pre>
+<pre><code>## 5353 records found (request limited to 10 records)</code></pre>
 <pre class="r"><code>author.and.author &lt;- dnb_search(author=c(&quot;kern&quot;, &quot;+locke&quot;))</code></pre>
 <pre><code>## 2 records found (request limited to 10 records)</code></pre>
 <pre class="r"><code>author.not.author &lt;- dnb_search(author=c(&quot;kern&quot;, &quot;-locke&quot;))</code></pre>
-<pre><code>## 4939 records found (request limited to 10 records)</code></pre>
+<pre><code>## 4955 records found (request limited to 10 records)</code></pre>
 </div>
 <div id="search-for-publication-year" class="section level5">
 <h5>Search for publication year</h5>
@@ -155,13 +156,13 @@ devtools::install_github(&quot;chgrl/rdnb&quot;)</code></pre>
 <h5>Search for keyword</h5>
 <p>Keyword (subjects, persons, locations, organisations, etc.) search is available using the <code>keyword</code> parameter. Logical operators can be set as explained for title search.</p>
 <pre class="r"><code>single.keyword &lt;- dnb_search(keyword =&quot;katze&quot;)</code></pre>
-<pre><code>## 4152 records found (request limited to 10 records)</code></pre>
+<pre><code>## 4160 records found (request limited to 10 records)</code></pre>
 <pre class="r"><code>keyword.or.keyword &lt;- dnb_search(keyword=c(&quot;katze&quot;, &quot;hund&quot;))</code></pre>
-<pre><code>## 10761 records found (request limited to 10 records)</code></pre>
+<pre><code>## 10776 records found (request limited to 10 records)</code></pre>
 <pre class="r"><code>keyword.and.keyword &lt;- dnb_search(keyword=c(&quot;katze&quot;, &quot;+hund&quot;))</code></pre>
-<pre><code>## 436 records found (request limited to 10 records)</code></pre>
+<pre><code>## 437 records found (request limited to 10 records)</code></pre>
 <pre class="r"><code>keyword.not.keyword &lt;- dnb_search(keyword=c(&quot;katze&quot;, &quot;-hund&quot;))</code></pre>
-<pre><code>## 3716 records found (request limited to 10 records)</code></pre>
+<pre><code>## 3723 records found (request limited to 10 records)</code></pre>
 </div>
 <div id="search-for-type-of-publication" class="section level5">
 <h5>Search for type of publication</h5>
@@ -194,19 +195,19 @@ devtools::install_github(&quot;chgrl/rdnb&quot;)</code></pre>
 </ul>
 <p>The <code>type</code> parameter can be specified as single string value (named above) or a vector of string values, that will be combined by “OR”. Short terms of the available types usually work.</p>
 <pre class="r"><code>single.type &lt;- dnb_search(title=&quot;katze&quot;, type=&quot;books&quot;)</code></pre>
-<pre><code>## 4548 records found (request limited to 10 records)</code></pre>
+<pre><code>## 4550 records found (request limited to 10 records)</code></pre>
 <pre class="r"><code>single.type.part &lt;- dnb_search(title=&quot;katze&quot;, type=&quot;bio&quot;) # biographicaldoc</code></pre>
 <pre><code>## no records found</code></pre>
 <pre class="r"><code>set.of.types &lt;- dnb_search(title=&quot;katze&quot;, type=c(&quot;books&quot;, &quot;articles&quot;, &quot;online&quot;))</code></pre>
-<pre><code>## 5181 records found (request limited to 10 records)</code></pre>
+<pre><code>## 5184 records found (request limited to 10 records)</code></pre>
 </div>
 <div id="search-for-language" class="section level5">
 <h5>Search for language</h5>
 <p>The DNB also archives publications in other languages than German, e.g. when they are about Germany or publicated in Germany. The language(s) can be filtered by ISO 639-2/B <a href="http://www.dnb.de/SharedDocs/Downloads/DE/DNB/standardisierung/inhaltserschliessung/sprachenCodesEnglisch.pdf?__blob=publicationFile">code</a>, like “ger” (German), “eng” (English), “fre” (French), “spa” (Spanish) or “gsw” (Swiss German). A vector of string values is combined by “OR”.</p>
 <pre class="r"><code>single.language &lt;- dnb_search(title=&quot;cat&quot;, language=&quot;eng&quot;)</code></pre>
-<pre><code>## 540 records found (request limited to 10 records)</code></pre>
+<pre><code>## 549 records found (request limited to 10 records)</code></pre>
 <pre class="r"><code>set.of.languages &lt;- dnb_search(title=c(&quot;cat&quot;, &quot;katze&quot;), language=c(&quot;eng&quot;, &quot;ger&quot;))</code></pre>
-<pre><code>## 3300 records found (request limited to 10 records)</code></pre>
+<pre><code>## 3313 records found (request limited to 10 records)</code></pre>
 </div>
 <div id="change-limit-of-results" class="section level5">
 <h5>Change limit of results</h5>
@@ -219,7 +220,7 @@ all.results &lt;- dnb_search(title=&quot;katze&quot;, year=2016, limit=&quot;all
 <h5>Results</h5>
 <p>Per default no results are printed. Set <code>print</code> to <code>TRUE</code> to print the <code>data.frame</code> with the results.</p>
 <pre class="r"><code>cats &lt;- dnb_search(title=&quot;katze&quot;, limit=3, print=TRUE)</code></pre>
-<pre><code>## 5895 records found (request limited to 3 records)</code></pre>
+<pre><code>## 5898 records found (request limited to 3 records)</code></pre>
 <pre><code>##           id                        link
 ## 1 1116362198 http://d-nb.info/1116362198
 ## 2 1120516579 http://d-nb.info/1120516579

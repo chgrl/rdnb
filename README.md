@@ -14,8 +14,6 @@ All bibliographic data of the German National Library are provided free of charg
 
 A personal access token is required for usage and can be requested by sending an e-mail to the Interface Service (schnittstellen-service@dnb.de). The e-mail must include the required catalogue "Catalogue of German National Library (DNB) / Katalog der Deutschen Nationalbibliothek (DNB)" and the access option "via access token / über Zugangscode".
 
-If you do not want to enter your token for each R session, put the following in your .Renviron or .Rprofile file:
-`DNB_TOKEN=PUTYOURTOKENHERE`.
 
 #### Source and more details:
 
@@ -49,6 +47,12 @@ devtools::install_github("chgrl/rdnb")
 
 ```r
 library(rdnb)
+```
+
+Performing a search, you will be prompted for your personal access token. If you do not want to enter your token again for every R session, you may use the `save_token` function to save it in your .Renviron file.
+
+```{r eval=FALSE}
+save_token("YOUR_TOKEN_HERE")
 ```
 
 

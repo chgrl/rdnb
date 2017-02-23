@@ -1,9 +1,8 @@
 <!--
 %\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Introduction to rdnb}
+%\VignetteIndexEntry{Intoduction to rdnb}
 %\VignetteEncoding{UTF-8}
 -->
-
 
 
 ### About the package
