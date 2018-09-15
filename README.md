@@ -35,9 +35,6 @@ To install the development version from GitHub the `devtools`-package is require
 
 
 ```r
-if(packageVersion("devtools") < 1.6) {
-  install.packages("devtools")
-}
 devtools::install_github("chgrl/rdnb")
 ```
 
@@ -204,10 +201,10 @@ cats <- dnb_search(title="katze", limit=3, print=TRUE)
 #> 3                            Krokowski, Carola (aut)
 #>                              title             subtitle
 #> 1 Alles Natur - Meine kleine Katze                 <NA>
-#> 2            Birl, die kühne Katze          Ein Märchen
+#> 2            Birl, die kühne Katze          Ein Märchen
 #> 3   Blutwerte - Pferd, Hund, Katze Blutwerte verstehen!
 #>                        publisher year language          isbn
-#> 1           Ars Edition, München 2017      ger 9783845815886
+#> 1           Ars Edition, München 2017      ger 9783845815886
 #> 2       Elsinor Verlag, Coesfeld 2017      ger 9783942788373
 #> 3 Igelsburg Verlag, Habichtswald 2017      ger 9783941933200
 #>                                                              price pages
