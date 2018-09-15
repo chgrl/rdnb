@@ -2,12 +2,9 @@ Package: rdnb
 Type: Package
 Title: R Interface to the 'Deutsche Nationalbibliothek (German National Library)
     API'
-Version: 0.1-1
-Date: 2017-02-14
-Author: c(
-    person("Christian", "Graul", email = "christian.graul@gmail.com",
-    role = c("aut", "cre"))
-    )
+Version: 0.1-2
+Date: 2018-09-15
+Author: Christian Graul [aut, cre]
 Maintainer: Christian Graul <christian.graul@gmail.com>
 Description: A wrapper for the 'Deutsche Nationalbibliothek (German National
     Library) API', available at <http://www.dnb.de>. The German National Library is
