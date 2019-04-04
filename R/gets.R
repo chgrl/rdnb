@@ -201,7 +201,7 @@ dnb_advanced <- function(query, limit=10, clean=TRUE, print=FALSE) {
 	
 	# make request
   req <- dnb_get_url(path="sru/dnb", query=query, limit=lim, start=strt)
-  raw <- dnb_parse(req)
+  raw <- dnb_parse(req)$searchRetrieveResponse
   
   # print number of records
 	nrec <- as.numeric(raw[["numberOfRecords"]])

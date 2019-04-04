@@ -93,16 +93,16 @@ dnb_to_df <- function(lst, clean) {
 			df$id[r] <- rec[["001"]]
 			df$link[r] <- paste0("http://d-nb.info/", rec[["001"]])	
 		}
-		if(!is.null(rec[["100"]][["a"]])) {	# author
-			aut <- rec[["100"]][["a"]]
-			if(!is.null(rec[["100"]][["4"]])) aut <- paste0(aut, " (", rec[["100"]][["4"]], ")")
+		if(!is.null(rec[["100"]][["subfield.a"]])) {	# author
+			aut <- rec[["100"]][["subfield.a"]]
+			if(!is.null(rec[["100"]][["subfield.4"]])) aut <- paste0(aut, " (", rec[["100"]][["subfield.4"]], ")")
 			df$author[r] <- aut
 		}
 		if(length(which(names(rec)=="700"))>0) {	# co-author
 			for(ca in which(names(rec)=="700")) {
-				if(!is.null(rec[[ca]][["a"]])) {
-					coaut <- rec[[ca]][["a"]]
-					if(!is.null(rec[[ca]][["4"]])) coaut <- paste0(coaut, " (", rec[[ca]][["4"]], ")")
+				if(!is.null(rec[[ca]][["subfield.a"]])) {
+					coaut <- rec[[ca]][["subfield.a"]]
+					if(!is.null(rec[[ca]][["subfield.4"]])) coaut <- paste0(coaut, " (", rec[[ca]][["subfield.4"]], ")")
 					if(is.na(df$author[r])) {
 						df$author[r] <- coaut
 					} else {
@@ -111,64 +111,64 @@ dnb_to_df <- function(lst, clean) {
 				}
 			}
 		}
-		if(!is.null(rec[["245"]][["a"]])) {	# title
-			df$title[r] <- rec[["245"]][["a"]]
+		if(!is.null(rec[["245"]][["subfield.a"]])) {	# title
+			df$title[r] <- rec[["245"]][["subfield.a"]]
 		}
-		if(!is.null(rec[["245"]][["b"]])) {	# subtitle
-			df$subtitle[r] <- rec[["245"]][["b"]]
+		if(!is.null(rec[["245"]][["subfield.b"]])) {	# subtitle
+			df$subtitle[r] <- rec[["245"]][["subfield.b"]]
 		}
-		if(!is.null(rec[["264"]][["b"]])) {	# publisher
-			pub <- rec[["264"]][["b"]]
-			if(!is.null(rec[["264"]][["a"]])) pub <- paste0(pub, ", ", rec[["264"]][["a"]])
+		if(!is.null(rec[["264"]][["subfield.b"]])) {	# publisher
+			pub <- rec[["264"]][["subfield.b"]]
+			if(!is.null(rec[["264"]][["subfield.a"]])) pub <- paste0(pub, ", ", rec[["264"]][["subfield.a"]])
 			df$publisher[r] <- pub
 		}
-		if(!is.null(rec[["264"]][["c"]])) {	# year
-			df$year[r] <- rec[["264"]][["c"]]
+		if(!is.null(rec[["264"]][["subfield.c"]])) {	# year
+			df$year[r] <- rec[["264"]][["subfield.c"]]
 		}
-		if(!is.null(rec[["041"]][["a"]])) {	# language
-			df$language[r] <- rec[["041"]][["a"]]
+		if(!is.null(rec[["041"]][["subfield.a"]])) {	# language
+			df$language[r] <- rec[["041"]][["subfield.a"]]
 		}
-		if(!is.null(rec[["024"]][["a"]])) {	# isbn
-			df$isbn[r] <- rec[["024"]][["a"]]
-		} else if(!is.null(rec[["020"]][["a"]])) {
-			df$isbn[r] <- rec[["020"]][["a"]]
+		if(!is.null(rec[["024"]][["subfield.a"]])) {	# isbn
+			df$isbn[r] <- rec[["024"]][["subfield.a"]]
+		} else if(!is.null(rec[["020"]][["subfield.a"]])) {
+			df$isbn[r] <- rec[["020"]][["subfield.a"]]
 		}
-		if(!is.null(rec[["020"]][["c"]])) {	# price
-			df$price[r] <- rec[["020"]][["c"]]
+		if(!is.null(rec[["020"]][["subfield.c"]])) {	# price
+			df$price[r] <- rec[["020"]][["subfield.c"]]
 		}
-		if(!is.null(rec[["300"]][["a"]])) {	# pages
-			df$pages[r] <- rec[["300"]][["a"]]
+		if(!is.null(rec[["300"]][["subfield.a"]])) {	# pages
+			df$pages[r] <- rec[["300"]][["subfield.a"]]
 		}
-		if(!is.null(rec[["300"]][["c"]])) {	# format
-			df$format[r] <- rec[["300"]][["c"]]
+		if(!is.null(rec[["300"]][["subfield.c"]])) {	# format
+			df$format[r] <- rec[["300"]][["subfield.c"]]
 		}
-		if(!is.null(rec[["250"]][["a"]])) {	# edition
-			df$edition[r] <- rec[["250"]][["a"]]
+		if(!is.null(rec[["250"]][["subfield.a"]])) {	# edition
+			df$edition[r] <- rec[["250"]][["subfield.a"]]
 		}
 		if(length(which(names(rec)=="689"))>0) {	# keyword
 			for(kw in which(names(rec)=="689")) {
-				if(!is.null(rec[[kw]][["a"]])) {
+				if(!is.null(rec[[kw]][["subfield.a"]])) {
 					if(is.na(df$keyword[r])) {
-						df$keyword[r] <- rec[[kw]][["a"]]
+						df$keyword[r] <- rec[[kw]][["subfield.a"]]
 					} else {
-						df$keyword[r] <- paste(df$keyword[r], rec[[kw]][["a"]], sep="; ")
+						df$keyword[r] <- paste(df$keyword[r], rec[[kw]][["subfield.a"]], sep="; ")
 					}
 				}
 			}
 		}
 		if(length(which(names(rec)=="856"))>0) {	# toc/description
 			for(kw in which(names(rec)=="856")) {
-				if(!is.null(rec[[kw]][["3"]]) && !is.null(rec[[kw]][["u"]])) {
-					if(rec[[kw]][["3"]]=="Inhaltsverzeichnis") {
-						df$toc[r] <- rec[[kw]][["u"]]
-					} else if(rec[[kw]][["3"]]=="Inhaltstext") {
-						df$description[r] <- rec[[kw]][["u"]]
+				if(!is.null(rec[[kw]][["subfield.3"]]) && !is.null(rec[[kw]][["subfield.u"]])) {
+					if(rec[[kw]][["subfield.3"]]=="Inhaltsverzeichnis") {
+						df$toc[r] <- rec[[kw]][["subfield.u"]]
+					} else if(rec[[kw]][["subfield.3"]]=="Inhaltstext") {
+						df$description[r] <- rec[[kw]][["subfield.u"]]
 					}
 				}
 			}
 		}
-		if(!is.null(rec[["020"]][["9"]])) {	# cover
-			df$cover[r] <- paste0("https://portal.dnb.de/opac/mvb/cover.htm?isbn=", rec[["020"]][["9"]])
+		if(!is.null(rec[["020"]][["subfield.9"]])) {	# cover
+			df$cover[r] <- paste0("https://portal.dnb.de/opac/mvb/cover.htm?isbn=", rec[["020"]][["subfield.9"]])
 		}	
 	}
 	
