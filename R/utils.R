@@ -124,6 +124,10 @@ dnb_to_df <- function(lst, clean) {
 		}
 		if(!is.null(rec[["264"]][["subfield.c"]])) {	# year
 			df$year[r] <- rec[["264"]][["subfield.c"]]
+		} else {
+		  if(!is.null(rec[["008"]])) {	# year 2
+		    df$year[r] <- rec[["008"]]
+		  }
 		}
 		if(!is.null(rec[["041"]][["subfield.a"]])) {	# language
 			df$language[r] <- rec[["041"]][["subfield.a"]]
@@ -181,7 +185,10 @@ dnb_to_df <- function(lst, clean) {
 			df <- as.data.frame(sapply(df, gsub, pattern="..", replacement=".", fixed=TRUE), stringsAsFactors=FALSE)
 			df <- as.data.frame(sapply(df, gsub, pattern=";;", replacement=";", fixed=TRUE), stringsAsFactors=FALSE)
 		}
-		df$year <- sapply(df$year, gsub, pattern="[^0-9]", replacement="")
+	  df$author <- sapply(df$author, gsub, pattern=" (aut)", replacement="", fixed=TRUE)
+	  df$year <- sapply(df$year, function(x) str_split(x, pattern=" ", n=2)[[1]][1])
+	  df$year <- sapply(df$year, function(x) substr(x, nchar(x)-3, nchar(x)))
+	  df$year <- sapply(df$year, gsub, pattern="[^0-9]", replacement="")
 		df$year <- as.numeric(df$year)
 		df$pages <- sapply(df$pages, gsub, pattern=" S.", replacement="", fixed=TRUE)
 		df$pages <- sapply(df$pages, gsub, pattern=" Seiten", replacement="", fixed=TRUE)

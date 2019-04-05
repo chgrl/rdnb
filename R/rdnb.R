@@ -8,6 +8,7 @@
 #' @references About the DNB: \url{http://www.dnb.de/EN/Wir/wir_node.html}; about the interface and access requirements: \url{http://www.dnb.de/EN/Service/DigitaleDienste/SRU/sru_node.html}; the DNB web search: \url{http://dnb.dnb.de}
 #' @importFrom httr GET
 #' @importFrom httr content
+#' @importFrom stringr str_split
 #' @importFrom xml2 as_list
 #' @importFrom xml2 read_xml
 #' @importFrom stats setNames

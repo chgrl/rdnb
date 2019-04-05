@@ -25,6 +25,7 @@ Imports:
     methods,
     utils,
     stats,
+    stringr,
     xml2
 Suggests:
     knitr

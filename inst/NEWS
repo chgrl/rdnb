@@ -1,6 +1,7 @@
 rdnb 0.1-3 [2019-04-05]
 -----------------------
 * parsing error fixed (changes in XML structure)
+* improvements in clearing out and cleaning of data
 
 rdnb 0.1-2 [2018-09-15]
 -----------------------
