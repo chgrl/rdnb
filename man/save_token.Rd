@@ -23,4 +23,3 @@ If an environment variable named "DNB_TOKEN" is found in the file, it is updated
 save_token(token="YOUR_TOKEN_HERE")
 }
 }
-

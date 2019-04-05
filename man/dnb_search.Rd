@@ -81,4 +81,3 @@ first.result <- dnb_search(title="katze", limit=1)
 all.results <- dnb_search(title="katze", limit="all")
 }
 }
-

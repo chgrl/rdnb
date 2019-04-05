@@ -4,6 +4,7 @@
 \name{rdnb}
 \alias{rdnb}
 \alias{rdnb-package}
+\alias{rdnb-package}
 \title{R Interface to the Deutsche Nationalbibliothek (German National Library) API}
 \description{
 A wrapper for the Deutsche Nationalbibliothek (German National Library) API, available at \url{http://www.dnb.de}. The German National Library is the German central archival library, collecting, archiving, bibliographically classifying all German and German-language publications, foreign publications about Germany, translations of German works, and the works of German-speaking emigrants published abroad between 1933 and 1945.
@@ -16,4 +17,3 @@ A personal access token is required for usage and can be requested by sending an
 \references{
 About the DNB: \url{http://www.dnb.de/EN/Wir/wir_node.html}; about the interface and access requirements: \url{http://www.dnb.de/EN/Service/DigitaleDienste/SRU/sru_node.html}; the DNB web search: \url{http://dnb.dnb.de}
 }
-

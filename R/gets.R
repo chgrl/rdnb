@@ -216,17 +216,18 @@ dnb_advanced <- function(query, limit=10, clean=TRUE, print=FALSE) {
   # loop request for more than 100 records
 	nend <- NULL
 	if(any(limit=="all") || lim>100) {
-		if(any(limit=="all")) nend <- nrec
-		else {
+		if(any(limit=="all")) {
+		  nend <- nrec
+		} else {
 			nend <- lim
 			lim <- 100
 		}
 		strt <- as.numeric(raw[["nextRecordPosition"]])
 		pb <- txtProgressBar(min=0, max=nend, style=3)
 		repeat{
-			if(strt>nend) break
+		  if(strt>nend) break
 			req <- dnb_get_url(path="sru/dnb", query=query, limit=lim, start=strt)
-			raw <- dnb_parse(req)
+			raw <- dnb_parse(req)$searchRetrieveResponse
 			df_add <- dnb_to_df(raw, clean=clean)
 			df <- rbind(df, df_add)
 			strt <- as.numeric(raw[["nextRecordPosition"]])

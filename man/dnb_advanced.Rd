@@ -69,4 +69,3 @@ price \tab Pb. \tab Paperback
 cats <- dnb_advanced("(tit=katze OR tit=kater NOT tit=hund) AND jhr>2000 AND mat=books AND spr=ger")
 }
 }
-

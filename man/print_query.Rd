@@ -21,4 +21,3 @@ dnb.srch <- dnb_search(title="katze")
 print_query(dnb.srch)
 }
 }
-
