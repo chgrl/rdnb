@@ -10,16 +10,13 @@ An R interface to the Deutsche Nationalbibliothek (German National Library) API
 
 `rdnb` is an R wrapper for the Deutsche Nationalbibliothek (German National Library) API, available at http://www.dnb.de. As the German central archival library, the German National Library is collecting, archiving, bibliographically classifying all German and German-language publications, foreign publications about Germany, translations of German works, and the works of German-speaking emigrants published abroad between 1933 and 1945.
 
-All bibliographic data of the German National Library are provided free of charge and can be freely re-used under "Creative Commons Zero" ([CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/deed.en)) terms. The metadata and online interfaces are provided with no guarantee of their being continuous, punctual, error-free or complete, or of their not infringing the rights of third parties (e.g. personal rights and copyright).
-
-A personal access token is required for usage and can be requested by sending an e-mail to the Interface Service (schnittstellen-service@dnb.de). The e-mail must include the required catalogue "Catalogue of German National Library (DNB) / Katalog der Deutschen Nationalbibliothek (DNB)" and the access option "via access token / über Zugangscode".
+All bibliographic data of the German National Library are provided free of charge and can be freely re-used under "Creative Commons Zero" ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.de)) terms. The metadata and online interfaces are provided with no guarantee of their being continuous, punctual, error-free or complete, or of their not infringing the rights of third parties (e.g. personal rights and copyright).
 
 
 #### Source and more details:
 
-[About the DNB](http://www.dnb.de/EN/Wir/wir_node.html); 
-[About the interface and access requirements](http://www.dnb.de/EN/Service/DigitaleDienste/SRU/sru_node.html); 
-[The DNB web search](http://dnb.dnb.de)
+[About the DNB](https://www.dnb.de/EN/Ueber-uns/ueberUns_node.html); 
+[About the interface](https://www.dnb.de/EN/Professionell/Metadatendienste/Datenbezug/SRU/sru_node.html)
 
 
 ### Package install
@@ -44,12 +41,6 @@ devtools::install_github("chgrl/rdnb")
 
 ```r
 library(rdnb)
-```
-
-Performing a search, you will be prompted for your personal access token. If you do not want to enter your token again for every R session, you may use the `save_token` function to save it in your .Renviron file.
-
-```{r eval=FALSE}
-save_token("YOUR_TOKEN_HERE")
 ```
 
 
@@ -165,7 +156,7 @@ set.of.types <- dnb_search(title="katze", type=c("books", "articles", "online"))
 
 ##### Search for language
 
-The DNB also archives publications in other languages than German, e.g. when they are about Germany or publicated in Germany. The language(s) can be filtered by ISO 639-2/B [code](http://www.dnb.de/SharedDocs/Downloads/DE/DNB/standardisierung/inhaltserschliessung/sprachenCodesEnglisch.pdf?__blob=publicationFile), like "ger" (German), "eng" (English), "fre" (French), "spa" (Spanish) or "gsw" (Swiss German). A vector of string values is combined by "OR".
+The DNB also archives publications in other languages than German, e.g. when they are about Germany or publicated in Germany. The language(s) can be filtered by ISO 639-2/B [code](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes), like "ger" (German), "eng" (English), "fre" (French), "spa" (Spanish) or "gsw" (Swiss German). A vector of string values is combined by "OR".
 
 
 ```r
@@ -249,7 +240,7 @@ The following data is stored in the `data.frame` (if available):
 
 #### Advanced search - `dnb_advanced`
 
-`dnb_advanced` allows for complex requests using the Contextual Query Language (CQL). See the [DNB advanced search help pages](http://www.dnb.de/EN/Header/Hilfe/kataloghilfeExpertensuche.html) for available indices and a list of examples.
+`dnb_advanced` allows for complex requests using the Contextual Query Language (CQL). See the [DNB advanced search help pages](https://www.dnb.de/expertensuche) for available indices and a list of examples.
 
 The following advanced search returns a list of german or english children's books titled with 'cat', excluding titles containing 'dog', since the year 2001:
 
