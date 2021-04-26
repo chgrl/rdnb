@@ -3,9 +3,6 @@
 \name{dnb_advanced}
 \alias{dnb_advanced}
 \title{Search the DNB catalogue - advanced search}
-\source{
-\url{http://www.dnb.de/EN/Service/DigitaleDienste/SRU/sru_node.html}
-}
 \usage{
 dnb_advanced(query, limit = 10, clean = TRUE, print = FALSE)
 }

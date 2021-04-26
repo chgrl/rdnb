@@ -6,13 +6,12 @@
 #' @param publisher the publisher (publisher name and/or location); optional single string value or vector of strings.
 #' @param keyword one or a set of keywords describing the work (subjects, persons, locations, organisations, etc.); optional single string value or vector of strings.
 #' @param type the type of publication (optional), one or a vector of \code{articles}, \code{manuscript}, \code{biographicaldoc}, \code{letters}, \code{bequest}, \code{collections}, \code{books}, \code{brailles}, \code{maps}, \code{discs}, \code{dissertations}, \code{online}, \code{films}, \code{microfiches}, \code{multimedia}, \code{music}, \code{scores}, \code{serials}, \code{persons}, \code{subjects}, \code{corperations}, \code{works}, \code{events}, \code{geographics}.
-#' @param language the language of the work by ISO 639-2/B code (\url{http://www.dnb.de/SharedDocs/Downloads/DE/DNB/standardisierung/inhaltserschliessung/sprachenCodesEnglisch.pdf?__blob=publicationFile}); single string value or vector of strings.
+#' @param language the language of the work by ISO 639-2/B code (\url{https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes}); single string value or vector of strings.
 #' @param limit number and (optional) starting point of results returned; single integer value (number of results), vector of two integer values (number of results and first result, >=1) or \code{"all"} for a complete list of results.
 #' @param clean if \code{TRUE} (the default), the results are cleaned (see \code{\link{dnb_advanced}} for details).
 #' @param print if \code{TRUE} the search results are printed (default is \code{FALSE}).
 #' @return A list of results with metadata.
 #' @details to do
-#' @source \url{http://www.dnb.de/EN/Service/DigitaleDienste/SRU/sru_node.html}
 #' @export
 #' @examples
 #' \dontrun{
@@ -176,7 +175,6 @@ dnb_search <- function(title, author, year, publisher, keyword, type, language, 
 #' price \tab Spiralb. \tab Spiralbindung \cr
 #' price \tab Pb. \tab Paperback
 #' }
-#' @source \url{http://www.dnb.de/EN/Service/DigitaleDienste/SRU/sru_node.html}
 #' @export
 #' @examples
 #' \dontrun{

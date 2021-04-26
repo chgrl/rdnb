@@ -3,12 +3,19 @@
 \name{dnb_search}
 \alias{dnb_search}
 \title{Search the DNB catalogue - simple search}
-\source{
-\url{http://www.dnb.de/EN/Service/DigitaleDienste/SRU/sru_node.html}
-}
 \usage{
-dnb_search(title, author, year, publisher, keyword, type, language,
-  limit = 10, clean = TRUE, print = FALSE)
+dnb_search(
+  title,
+  author,
+  year,
+  publisher,
+  keyword,
+  type,
+  language,
+  limit = 10,
+  clean = TRUE,
+  print = FALSE
+)
 }
 \arguments{
 \item{title}{the title (including subtitle, short title, volume title, etc.); optional single string value or vector of strings.}
@@ -23,7 +30,7 @@ dnb_search(title, author, year, publisher, keyword, type, language,
 
 \item{type}{the type of publication (optional), one or a vector of \code{articles}, \code{manuscript}, \code{biographicaldoc}, \code{letters}, \code{bequest}, \code{collections}, \code{books}, \code{brailles}, \code{maps}, \code{discs}, \code{dissertations}, \code{online}, \code{films}, \code{microfiches}, \code{multimedia}, \code{music}, \code{scores}, \code{serials}, \code{persons}, \code{subjects}, \code{corperations}, \code{works}, \code{events}, \code{geographics}.}
 
-\item{language}{the language of the work by ISO 639-2/B code (\url{http://www.dnb.de/SharedDocs/Downloads/DE/DNB/standardisierung/inhaltserschliessung/sprachenCodesEnglisch.pdf?__blob=publicationFile}); single string value or vector of strings.}
+\item{language}{the language of the work by ISO 639-2/B code (\url{https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes}); single string value or vector of strings.}
 
 \item{limit}{number and (optional) starting point of results returned; single integer value (number of results), vector of two integer values (number of results and first result, >=1) or \code{"all"} for a complete list of results.}
 

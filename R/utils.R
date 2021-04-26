@@ -1,5 +1,5 @@
-dnb_get_url <- function(path, query, limit, start, token=dnb_token()) {
-	req <- GET("http://services.dnb.de/", path=path, query=list(version="1.1", operation="searchRetrieve", accessToken=token, query=query, maximumRecords=limit, startRecord=start, recordSchema="MARC21-xml"))
+dnb_get_url <- function(path, query, limit, start) {
+	req <- GET("http://services.dnb.de/", path=path, query=list(version="1.1", operation="searchRetrieve", query=query, maximumRecords=limit, startRecord=start, recordSchema="MARC21-xml"))
 	dnb_check(req)
 	if(getOption("rdnb_show_url")) message("Request: ", req$url)
 	return(req)
@@ -19,60 +19,6 @@ dnb_parse <- function(req) {
 	if(length(grep("text/xml", req$headers$'content-type', fixed=TRUE))==0) stop("No XML to parse", call.=FALSE)
 	parsed <- as_list(read_xml(gsub("\n +", "", xml)))
 	return(parsed)
-}
-
-
-dnb_token <- function(force=FALSE) {
-	env <- Sys.getenv('DNB_TOKEN')
-	if(!identical(env, "") && !force) return(env)
-	if(!interactive()) {
-		stop("Please set env var 'DNB_TOKEN' to your personal access token", call.=FALSE)
-	}
-	message("Couldn't find env var DNB_TOKEN")
-	message("Please enter your token and press enter")
-	token <- readline(": ")
-	if(identical(token, "")) {
-		stop("Token entry failed", call.=FALSE)
-	}
-	message("Updating DNB_TOKEN env var to given token")
-	Sys.setenv(DNB_TOKEN=gsub("\"", "", token, fixed=TRUE))
-	return(token)
-}
-
-
-#' @title Save token to file
-#' @description \code{save_token} saves the DNB token to file, so the user does not to enter it for each R session.
-#' @param token the personal DNB token as string.
-#' @param path the path to the file where the token is stored. Default is the .Renvion file in the users home directory.
-#' @note If an environment variable named "DNB_TOKEN" is found in the file, it is updated to the given token.
-#' @examples
-#' \dontrun{
-#' save_token(token="YOUR_TOKEN_HERE")
-#' }
-#' @export
-save_token <- function(token=dnb_token(), 
-                      path=paste(normalizePath("~/"), ".Renviron", sep="/")){
-  # check file
-  if(!file.exists(path)) {
-    file.create(path)
-    message(".Renviron file created")
-  }
-    
-  # read file
-  env <- readLines(path, encoding="UTF-8")
-  
-  # write token
-  if(length(grep("DNB_TOKEN=.", env) > 0)) { # update
-    env[tail(grep("DNB_TOKEN=.", env), 1)] <- paste0("DNB_TOKEN=", token)
-    writeLines(env, path)
-    message("DNB_TOKEN updated in ", path)
-  } else {  # create
-    writeLines(paste0(env, "\nDNB_TOKEN=", token), path)
-    message("DNB_TOKEN created in ", path)
-  }
-  
-  # set environment variable
-  Sys.setenv(DNB_TOKEN=token)
 }
 
 
