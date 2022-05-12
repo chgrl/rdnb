@@ -229,6 +229,7 @@ dnb_advanced <- function(query, limit=10, clean=TRUE, print=FALSE) {
 			df_add <- dnb_to_df(raw, clean=clean)
 			df <- rbind(df, df_add)
 			strt <- as.numeric(raw[["nextRecordPosition"]])
+			if(length(strt) == 0) break
 			setTxtProgressBar(pb, strt)
 		}
 		setTxtProgressBar(pb, nend)
