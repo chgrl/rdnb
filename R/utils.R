@@ -37,7 +37,7 @@ dnb_to_df <- function(lst, clean) {
 		
 		if(!is.null(rec[["001"]])) {	# id/link
 			df$id[r] <- rec[["001"]]
-			df$link[r] <- paste0("http://d-nb.info/", rec[["001"]])	
+			df$link[r] <- paste0("https://d-nb.info/", rec[["001"]])	
 		}
 		if(!is.null(rec[["100"]][["subfield.a"]])) {	# author
 			aut <- rec[["100"]][["subfield.a"]]

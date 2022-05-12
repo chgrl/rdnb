@@ -7,7 +7,7 @@
 
 ### About the package
 
-`rdnb` is an R wrapper for the Deutsche Nationalbibliothek (German National Library) API, available at http://www.dnb.de. As the German central archival library, the German National Library is collecting, archiving, bibliographically classifying all German and German-language publications, foreign publications about Germany, translations of German works, and the works of German-speaking emigrants published abroad between 1933 and 1945.
+`rdnb` is an R wrapper for the Deutsche Nationalbibliothek (German National Library) API, available at https://www.dnb.de/EN/Home/home_node.html. As the German central archival library, the German National Library is collecting, archiving, bibliographically classifying all German and German-language publications, foreign publications about Germany, translations of German works, and the works of German-speaking emigrants published abroad between 1933 and 1945.
 
 All bibliographic data of the German National Library are provided free of charge and can be freely re-used under "Creative Commons Zero" ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.de)) terms. The metadata and online interfaces are provided with no guarantee of their being continuous, punctual, error-free or complete, or of their not infringing the rights of third parties (e.g. personal rights and copyright).
 
@@ -182,9 +182,9 @@ Per default no results are printed. Set `print` to `TRUE` to print the `data.fra
 ```r
 cats <- dnb_search(title="katze", limit=3, print=TRUE)
 #>           id                        link
-#> 1 1116362198 http://d-nb.info/1116362198
-#> 2 1120516579 http://d-nb.info/1120516579
-#> 3 1125403497 http://d-nb.info/1125403497
+#> 1 1116362198 https://d-nb.info/1116362198
+#> 2 1120516579 https://d-nb.info/1120516579
+#> 3 1125403497 https://d-nb.info/1125403497
 #>                                               author
 #> 1 Teckentrup, Britta (ill); Teckentrup, Britta (aut)
 #> 2                       Frey, Alexander Moritz (aut)
@@ -206,7 +206,7 @@ cats <- dnb_search(title="katze", limit=3, print=TRUE)
 #> 2     19 cm x 12 cm 1. Auflage, neue Ausgabe    <NA> <NA>
 #> 3              <NA>               1. Auflage    <NA> <NA>
 #>                                                                                               description
-#> 1 http://deposit.d-nb.de/cgi-bin/dokserv?id=992efedfe14a4b06ad7dc4f344cd9e87&prov=M&dok_var=1&dok_ext=htm
+#> 1 https://deposit.d-nb.de/cgi-bin/dokserv?id=992efedfe14a4b06ad7dc4f344cd9e87&prov=M&dok_var=1&dok_ext=htm
 #> 2                                                                                                    <NA>
 #> 3                                                                                                    <NA>
 #>                                                             cover
@@ -239,7 +239,7 @@ The following data is stored in the `data.frame` (if available):
 
 #### Advanced search - `dnb_advanced`
 
-`dnb_advanced` allows for complex requests using the Contextual Query Language (CQL). See the [DNB advanced search help pages](https://www.dnb.de/expertensuche) for available indices.
+`dnb_advanced` allows for complex requests using the Contextual Query Language (CQL). See the [DNB advanced search help pages](https://www.dnb.de/EN/Service/Hilfe/Katalog/kataloghilfeExpertensuche.html) for available indices and a list of examples.
 
 The following advanced search returns a list of german or english children's books titled with 'cat', excluding titles containing 'dog', since the year 2001:
 
