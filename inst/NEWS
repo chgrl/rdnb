@@ -1,3 +1,7 @@
+rdnb 0.1-5 [2022-05-12]
+-----------------------
+* bug fixed: dnb_advanced with limit="all" crashed
+
 rdnb 0.1-4 [2021-04-17]
 -----------------------
 * no access token required anymore!
