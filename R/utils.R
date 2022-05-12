@@ -1,5 +1,5 @@
 dnb_get_url <- function(path, query, limit, start) {
-	req <- GET("http://services.dnb.de/", path=path, query=list(version="1.1", operation="searchRetrieve", query=query, maximumRecords=limit, startRecord=start, recordSchema="MARC21-xml"))
+	req <- GET("https://services.dnb.de/", path=path, query=list(version="1.1", operation="searchRetrieve", query=query, maximumRecords=limit, startRecord=start, recordSchema="MARC21-xml"))
 	dnb_check(req)
 	if(getOption("rdnb_show_url")) message("Request: ", req$url)
 	return(req)
