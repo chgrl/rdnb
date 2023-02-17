@@ -3,10 +3,10 @@ citHeader("To cite package 'rdnb' in publications use:")
 citEntry(entry = "Manual",
          title = "rdnb: R interface to the Deutsche Nationalbibliohek (German National Library) API",
          author = "Christian Graul",
-         year = "2022",
+         year = "2023",
          url = "https://cran.r-project.org/package=rdnb",
-         note = "R package version 0.1-5",
-         textVersion = "Graul, Christian (2022): rdnb: R interface to the Deutsche Nationalbibliohek (German National Library) API. R package version 0.1-5, https://cran.r-project.org/package=rdnb.")
+         note = "R package version 0.1-6",
+         textVersion = "Graul, Christian (2023): rdnb: R interface to the Deutsche Nationalbibliohek (German National Library) API. R package version 0.1-6, https://cran.r-project.org/package=rdnb.")
 
 citFooter("Please cite both 'rdnb' and R when using 'rdnb'.",
           "For R citation, see ", sQuote("citation()"))

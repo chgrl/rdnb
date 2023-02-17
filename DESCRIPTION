@@ -2,8 +2,8 @@ Package: rdnb
 Type: Package
 Title: R Interface to the 'Deutsche Nationalbibliothek (German National Library)
     API'
-Version: 0.1-5
-Date: 2022-05-12
+Version: 0.1-6
+Date: 2023-02-17
 Author: Christian Graul [aut, cre]
 Maintainer: Christian Graul <christian.graul@gmail.com>
 Description: A wrapper for the 'Deutsche Nationalbibliothek (German National

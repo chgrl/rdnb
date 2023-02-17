@@ -1,3 +1,7 @@
+rdnb 0.1-6 [2023-02-17]
+-----------------------
+* bug fixed: potential error in case of empty sublists in dnb-data
+
 rdnb 0.1-5 [2022-05-12]
 -----------------------
 * bug fixed: dnb_advanced with limit="all" crashed
