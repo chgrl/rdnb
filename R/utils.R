@@ -32,7 +32,7 @@ dnb_to_df <- function(lst, clean) {
 	for(r in 1:nrec) {
 		rec <- lst$records[[r]]$recordData$record
 		rec <- setNames(rec, sapply(rec, function(x) attributes(x)$tag))
-		rec <- lapply(rec, function(x) lapply(x, function(y) setNames(y, attributes(y)$code)))
+		rec <- lapply(rec, function(x) lapply(x, function(y) if(length(y) == 0) y else setNames(y, attributes(y)$code)))
 		rec <- lapply(rec, function(x) unlist(x, recursive=FALSE))
 		
 		if(!is.null(rec[["001"]])) {	# id/link
