@@ -2,7 +2,6 @@
 
 An R interface to the Deutsche Nationalbibliothek (German National Library) API
 
-[![Build Status](https://api.travis-ci.org/chgrl/rdnb.png)](https://travis-ci.org/chgrl/rdnb)
 ![downloads](http://cranlogs.r-pkg.org/badges/grand-total/rdnb)
 
 
